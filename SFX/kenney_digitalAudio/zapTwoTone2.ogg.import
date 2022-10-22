@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zapTwoTone2.ogg-8155d58f86d8a9c4ec9cdf345816197c.oggstr"
+
+[deps]
+
+source_file="res://SFX/kenney_digitalAudio/zapTwoTone2.ogg"
+dest_files=[ "res://.import/zapTwoTone2.ogg-8155d58f86d8a9c4ec9cdf345816197c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

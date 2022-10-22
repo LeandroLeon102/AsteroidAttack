@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/stone1.wav-8da22f38e9fb1a717cca8e1f9102c858.sample"
+
+[deps]
+
+source_file="res://SFX/stone1.wav"
+dest_files=[ "res://.import/stone1.wav-8da22f38e9fb1a717cca8e1f9102c858.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

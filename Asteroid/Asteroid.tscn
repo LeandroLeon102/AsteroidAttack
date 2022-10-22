@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://SFX/lowFrequency_explosion_000.ogg" type="AudioStream" id=1]
+[ext_resource path="res://Asteroid/Asteroid.gd" type="Script" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[node name="Asteroid" type="KinematicBody2D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 31
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+bounce = 0.9
+minVel = 50
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="CollideSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+pitch_scale = 5.0

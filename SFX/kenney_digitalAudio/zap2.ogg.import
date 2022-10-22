@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zap2.ogg-1b9231ab27fab48ba5abf982efda43e3.oggstr"
+
+[deps]
+
+source_file="res://SFX/kenney_digitalAudio/zap2.ogg"
+dest_files=[ "res://.import/zap2.ogg-1b9231ab27fab48ba5abf982efda43e3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
