@@ -1,0 +1,229 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
+[ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
+[ext_resource path="res://Source/Images/UI/forward.png" type="Texture" id=3]
+[ext_resource path="res://Source/Images/UI/wrench.png" type="Texture" id=4]
+[ext_resource path="res://Source/Images/UI/trophy.png" type="Texture" id=5]
+[ext_resource path="res://Source/Images/UI/information.png" type="Texture" id=6]
+[ext_resource path="res://Menus/MainMenu.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 64
+font_data = SubResource( 10 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "hide"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.000290768, 3.6943, 0.2, -2541.06, -1280, -0.6, 125.569, 0.841744, -176.161 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1280, -0.00146925, 3.69416, 0.3, -754.295, 0, -0.9, -17.4111, 1.57997, 30.5656 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[node name="MainMenu" type="Node" groups=["MainMenu"]]
+script = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+material = ExtResource( 1 )
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Label" type="Label" parent="Control"]
+modulate = Color( 15, 15, 15, 1 )
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -360.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 9 )
+text = "Asteroid  Atack !"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 320.0
+margin_right = -256.0
+margin_bottom = -106.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 75
+
+[node name="Play" type="Button" parent="Control/VBoxContainer"]
+modulate = Color( 2, 2, 2, 1 )
+use_parent_material = true
+margin_left = 259.0
+margin_right = 509.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 250, 0 )
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_bottom = NodePath("../Settings")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Play"
+icon = ExtResource( 3 )
+
+[node name="Settings" type="Button" parent="Control/VBoxContainer"]
+modulate = Color( 2, 2, 2, 1 )
+use_parent_material = true
+margin_left = 259.0
+margin_top = 125.0
+margin_right = 509.0
+margin_bottom = 175.0
+rect_min_size = Vector2( 250, 0 )
+focus_neighbour_top = NodePath("../Play")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_bottom = NodePath("../Exit")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Settings"
+icon = ExtResource( 4 )
+
+[node name="Exit" type="Button" parent="Control/VBoxContainer"]
+modulate = Color( 2, 2, 2, 1 )
+use_parent_material = true
+margin_left = 259.0
+margin_top = 250.0
+margin_right = 509.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 250, 0 )
+focus_neighbour_top = NodePath("../Settings")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_bottom = NodePath("../Play")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Exit"
+icon = ExtResource( 2 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1192.0
+margin_top = 542.0
+margin_right = -10.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Records" type="Button" parent="Control/VBoxContainer2"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+use_parent_material = true
+margin_left = 28.0
+margin_top = 33.0
+margin_right = 78.0
+margin_bottom = 83.0
+rect_clip_content = true
+focus_neighbour_left = NodePath("../../VBoxContainer/Play")
+focus_neighbour_top = NodePath("../Information")
+focus_neighbour_bottom = NodePath("../Information")
+size_flags_horizontal = 8
+size_flags_vertical = 10
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Information" type="Button" parent="Control/VBoxContainer2"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+use_parent_material = true
+margin_left = 28.0
+margin_top = 120.0
+margin_right = 78.0
+margin_bottom = 170.0
+focus_neighbour_left = NodePath("../../VBoxContainer/Play")
+focus_neighbour_top = NodePath("../Records")
+focus_neighbour_bottom = NodePath("../Records")
+size_flags_horizontal = 8
+size_flags_vertical = 10
+icon = ExtResource( 6 )
+flat = true
+icon_align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 1 )
+anims/hide = SubResource( 2 )
+anims/show = SubResource( 3 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="Sounds"]
+
+[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/Records" to="." method="_on_Records_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]

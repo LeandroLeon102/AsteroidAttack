@@ -1,0 +1,119 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
+[ext_resource path="res://Source/Images/Player/pivot.svg" type="Texture" id=3]
+[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=4]
+[ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]
+[ext_resource path="res://Bullets/PlayerBullet.tscn" type="PackedScene" id=6]
+
+[sub_resource type="PhysicsMaterial" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.6155
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotating"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 22.0227
+
+[node name="Player" type="RigidBody2D" groups=["Player"]]
+material = ExtResource( 4 )
+collision_mask = 218
+mode = 2
+mass = 15.0
+physics_material_override = SubResource( 4 )
+linear_damp = 2.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+max_velocity = 20
+acceleration = 20
+bullets = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+use_parent_material = true
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "rotating"
+anims/RESET = SubResource( 2 )
+anims/rotating = SubResource( 3 )
+
+[node name="pivot" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="Sprite" type="Sprite" parent="pivot"]
+use_parent_material = true
+position = Vector2( 12, 0 )
+rotation = 1.5708
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="pivot"]
+use_parent_material = true
+position = Vector2( 35, 0 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 0.5
+range_height = 50.0
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 5 )
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="ShootDelay" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="AutoShootDelay" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Hurt" type="Tween" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+use_parent_material = true
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 2 )
+
+[connection signal="tween_completed" from="Hurt" to="." method="_on_Hurt_tween_completed"]

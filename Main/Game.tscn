@@ -1,0 +1,422 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Main/Game.gd" type="Script" id=1]
+[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=2]
+[ext_resource path="res://Healthbar/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Main/HUD.gd" type="Script" id=4]
+[ext_resource path="res://Main/Advises.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 560, 100 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 560, 100 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 840, 100 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 840, 100 )
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.0
+bounce = 0.1
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 360 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 640, 1 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://Source/VFX/RawFonts/Kenney Pixel.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+size = 48
+font_data = SubResource( 12 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=21]
+font_path = "res://Source/VFX/RawFonts/Kenney Pixel.ttf"
+
+[sub_resource type="DynamicFont" id=22]
+size = 48
+font_data = SubResource( 21 )
+
+[sub_resource type="DynamicFontData" id=14]
+font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
+
+[sub_resource type="DynamicFont" id=16]
+size = 32
+font_data = SubResource( 14 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 56
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=23]
+font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
+
+[sub_resource type="DynamicFont" id=24]
+size = 56
+font_data = SubResource( 23 )
+
+[sub_resource type="DynamicFontData" id=17]
+font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
+
+[sub_resource type="DynamicFont" id=15]
+size = 64
+font_data = SubResource( 17 )
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "show"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 10, 10, 10, 1 ), Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "advice" ],
+"method": "change_camera_target"
+}, {
+"args": [ "player" ],
+"method": "change_camera_target"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "block_player_actions"
+}, {
+"args": [ false ],
+"method": "block_player_actions"
+} ]
+}
+
+[sub_resource type="Curve2D" id=20]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -200, -200, 0, 0, 0, 0, 1480, -200, 0, 0, 0, 0, 1480, 920, 0, 0, 0, 0, -200, 920, 0, 0, 0, 0, -200, -200 )
+}
+
+[node name="Game" type="Node" groups=["Game"]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ -50.0, 640.0 ]
+}
+wave = 8
+
+[node name="BordersImpulse" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="BordersImpulse"]
+position = Vector2( -100, 360 )
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 0
+space_override = 1
+gravity_vec = Vector2( 5, 0 )
+gravity = -50.0
+linear_damp = 0.0
+angular_damp = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BordersImpulse/Left"]
+shape = SubResource( 1 )
+
+[node name="Right" type="Area2D" parent="BordersImpulse"]
+position = Vector2( 1380, 360 )
+rotation = -1.5708
+collision_layer = 0
+collision_mask = 0
+space_override = 1
+gravity_vec = Vector2( 5, 0 )
+gravity = 50.0
+linear_damp = 0.0
+angular_damp = 0.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BordersImpulse/Right"]
+shape = SubResource( 5 )
+
+[node name="Up" type="Area2D" parent="BordersImpulse"]
+position = Vector2( 640, -100 )
+rotation = 3.14159
+collision_layer = 0
+collision_mask = 0
+space_override = 1
+gravity_point = true
+gravity_vec = Vector2( 0, 5 )
+gravity = -50.0
+linear_damp = 0.0
+angular_damp = 0.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BordersImpulse/Up"]
+shape = SubResource( 6 )
+
+[node name="Down" type="Area2D" parent="BordersImpulse"]
+position = Vector2( 640, 820 )
+collision_layer = 0
+collision_mask = 0
+space_override = 1
+gravity_point = true
+gravity_vec = Vector2( 0, 5 )
+gravity = 50.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BordersImpulse/Down"]
+shape = SubResource( 7 )
+
+[node name="PlayerLimits" type="Node" parent="."]
+
+[node name="Left" type="StaticBody2D" parent="PlayerLimits"]
+position = Vector2( 0, 360 )
+collision_layer = 64
+collision_mask = 0
+physics_material_override = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits/Left"]
+shape = SubResource( 2 )
+
+[node name="Right" type="StaticBody2D" parent="PlayerLimits"]
+position = Vector2( 1280, 360 )
+collision_layer = 64
+collision_mask = 0
+physics_material_override = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits/Right"]
+shape = SubResource( 2 )
+
+[node name="Up" type="StaticBody2D" parent="PlayerLimits"]
+position = Vector2( 640, 0 )
+collision_layer = 64
+collision_mask = 0
+physics_material_override = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits/Up"]
+shape = SubResource( 4 )
+
+[node name="Down" type="StaticBody2D" parent="PlayerLimits"]
+position = Vector2( 640, 720 )
+collision_layer = 64
+collision_mask = 0
+physics_material_override = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerLimits/Down"]
+shape = SubResource( 4 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 4 )
+
+[node name="Node2D" type="Node2D" parent="HUD"]
+material = ExtResource( 2 )
+
+[node name="ScoreText" type="Label" parent="HUD/Node2D"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+anchor_right = 1.0
+margin_top = 10.0
+margin_right = 1280.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 13 )
+text = "Score"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HealthText" type="Label" parent="HUD/Node2D"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_left = 75.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 9 )
+text = "Health"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemiesText" type="Label" parent="HUD/Node2D"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_left = 1029.0
+margin_top = 20.0
+margin_right = 1205.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 10 )
+text = "Enemies"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WaveText" type="Label" parent="HUD/Node2D"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 601.0
+margin_top = 590.0
+margin_right = 679.0
+margin_bottom = 626.0
+custom_fonts/font = SubResource( 22 )
+text = "Wave"
+align = 1
+valign = 1
+
+[node name="HealthBar" parent="HUD/Node2D" instance=ExtResource( 3 )]
+visible = true
+position = Vector2( 147, 100 )
+scale = Vector2( 1, 1 )
+
+[node name="EnemiesCount" type="Label" parent="HUD/Node2D"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_left = 961.0
+margin_top = 70.0
+margin_right = 1280.0
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 16 )
+text = "0"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScoreCount" type="Label" parent="HUD/Node2D"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_left = 400.0
+margin_top = 49.0
+margin_right = 880.0
+margin_bottom = 133.0
+custom_fonts/font = SubResource( 11 )
+text = "0"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="WaveCount" type="Label" parent="HUD/Node2D"]
+margin_left = 403.0
+margin_top = 626.0
+margin_right = 883.0
+margin_bottom = 710.0
+custom_fonts/font = SubResource( 24 )
+text = "0"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Advises" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Advises"]
+modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 15 )
+text = "central advice"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Advises"]
+autoplay = "RESET"
+anims/RESET = SubResource( 18 )
+anims/show = SubResource( 19 )
+
+[node name="Position2D" type="Position2D" parent="Advises"]
+position = Vector2( 640, 360 )
+
+[node name="MobSpawnRange" type="Path2D" parent="."]
+curve = SubResource( 20 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="MobSpawnRange"]
+position = Vector2( -200, -200 )
+loop = false

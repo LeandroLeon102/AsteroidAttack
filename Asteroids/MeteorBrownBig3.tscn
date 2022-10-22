@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Source/Images/Meteors/Meteors/meteorBrown_big3.svg" type="Texture" id=1]
+[ext_resource path="res://Asteroids/Asteroid.gd" type="Script" id=2]
+[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=3]
+[ext_resource path="res://Source/Images/Meteors/meteor normalmaps/meteorBrown_big3.png" type="Texture" id=4]
+
+[node name="MeteorBrownBig3" type="RigidBody2D"]
+material = ExtResource( 3 )
+rotation = -0.00398736
+collision_layer = 2
+collision_mask = 135
+mass = 90.0
+can_sleep = false
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+use_parent_material = true
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 1 )
+normal_map = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+use_parent_material = true
+polygon = PoolVector2Array( 25.5, -23.3, 39.9957, 1.15949, 18.8563, 36.0755, -25.1154, 28.9001, -38.0515, 12.8484, -38.9319, -17.1554, -9.86036, -35.0396 )
