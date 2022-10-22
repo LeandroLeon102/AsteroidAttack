@@ -1,0 +1,628 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Resources/fonts/Kenney Blocks.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Mouse.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_mid.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Images/spaceshooter/PNG/Meteors/meteorBrown_big1.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_right.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/healthbar.gd" type="Script" id=7]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_right.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_right.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_mid.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_left.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_left.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_mid.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_left.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Images/spaceshooter/PNG/Meteors/meteorGrey_small1.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Images/spaceshooter/PNG/Meteors/meteorGrey_med1.png" type="Texture" id=16]
+
+[sub_resource type="GDScript" id=20]
+script/source = "extends Node
+
+
+
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+"
+
+[sub_resource type="Environment" id=14]
+background_mode = 4
+glow_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id=15]
+light_mode = 1
+
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 180.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_random = 1.0
+scale_curve = SubResource( 4 )
+
+[sub_resource type="GDScript" id=18]
+script/source = "extends Particles2D
+
+
+func _ready():
+	randomize()
+
+func _physics_process(delta):
+	position = Vector2(rand_range(0, get_viewport_rect().size.x), rand_range(64, get_viewport_rect().size.y - 64))
+"
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=19]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=5]
+light_mode = 1
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.644828, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
+light_mode = 1
+
+[sub_resource type="DynamicFont" id=12]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="CanvasItemMaterial" id=23]
+light_mode = 1
+
+[sub_resource type="GDScript" id=27]
+script/source = "extends Node2D
+
+
+func _ready():
+	$healthbar.set_health(30)
+"
+
+[sub_resource type="CanvasItemMaterial" id=24]
+
+[sub_resource type="CanvasItemMaterial" id=25]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=26]
+light_mode = 1
+
+[sub_resource type="GDScript" id=28]
+script/source = "extends Node2D
+
+
+func _ready():
+	$healthbar.set_health(70)
+"
+
+[sub_resource type="GDScript" id=29]
+script/source = "extends Node2D
+
+
+func _ready():
+	$healthbar.set_health(10)
+"
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 13.7708
+
+[sub_resource type="CanvasItemMaterial" id=22]
+light_mode = 1
+
+[node name="Node" type="Node"]
+script = SubResource( 20 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 14 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.188235, 0.164706, 0.454902, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1024.0
+margin_top = -600.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 9
+color = Color( 0.0313726, 0.0196078, 0.172549, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" type="Particles2D" parent="."]
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 15 )
+position = Vector2( 87.9446, -40.5206 )
+amount = 24
+lifetime = 0.8
+local_coords = false
+process_material = SubResource( 17 )
+script = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="walls container" type="Node" parent="."]
+
+[node name="wallLeft" type="ColorRect" parent="walls container"]
+visible = false
+modulate = Color( 5, 5, 5, 1 )
+material = SubResource( 1 )
+margin_left = -8.0
+margin_top = -56.0
+margin_right = 56.0
+margin_bottom = 712.0
+rect_pivot_offset = Vector2( 1440, 456 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="wallright" type="ColorRect" parent="walls container"]
+visible = false
+modulate = Color( 5, 5, 5, 1 )
+material = SubResource( 2 )
+margin_left = 968.0
+margin_top = -56.0
+margin_right = 1032.0
+margin_bottom = 712.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="wallbottom" type="ColorRect" parent="walls container"]
+visible = false
+modulate = Color( 5, 5, 5, 1 )
+material = SubResource( 3 )
+margin_top = 640.0
+margin_right = 1024.0
+margin_bottom = 704.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="walltop" type="ColorRect" parent="walls container"]
+visible = false
+modulate = Color( 5, 5, 5, 1 )
+material = SubResource( 19 )
+margin_top = -64.0
+margin_right = 1024.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="top" type="Particles2D" parent="walls container"]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 5 )
+position = Vector2( 512, 0 )
+amount = 64
+explosiveness = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 10 )
+
+[node name="right" type="Particles2D" parent="walls container"]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 5 )
+position = Vector2( 960, 320 )
+rotation = 1.5708
+amount = 64
+explosiveness = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 10 )
+
+[node name="left" type="Particles2D" parent="walls container"]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 5 )
+position = Vector2( 64, 320 )
+rotation = -1.5708
+amount = 64
+explosiveness = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 10 )
+
+[node name="bottom" type="Particles2D" parent="walls container"]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 5 )
+position = Vector2( 512, 640 )
+rotation = 3.14159
+amount = 64
+explosiveness = 0.1
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 10 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 11 )
+anchor_right = 1.0
+margin_bottom = 640.0
+custom_fonts/font = SubResource( 12 )
+text = "Asteroid Atack!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 11 )
+anchor_right = 1.0
+margin_left = 128.0
+margin_top = 384.0
+margin_right = -632.0
+margin_bottom = 420.0
+custom_fonts/font = SubResource( 13 )
+text = "#KenneyJam2021"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+visible = false
+modulate = Color( 10, 10, 10, 1 )
+material = SubResource( 11 )
+anchor_right = 1.0
+margin_left = 608.0
+margin_top = 360.0
+margin_right = -128.0
+margin_bottom = 435.0
+custom_fonts/font = SubResource( 13 )
+text = "@LeandroLeonSoto
+@Leo102"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 456, 344 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 456, 344 )
+scale = Vector2( 0.5, 0.5 )
+current = true
+zoom = Vector2( 0.6, 0.6 )
+process_mode = 0
+limit_left = -32
+limit_top = -32
+limit_right = 1056
+limit_bottom = 672
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="asteroid" type="Node2D" parent="."]
+material = SubResource( 23 )
+position = Vector2( 672, 248 )
+script = SubResource( 27 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="asteroid"]
+material = SubResource( 24 )
+use_parent_material = true
+texture = ExtResource( 5 )
+
+[node name="healthbar" type="Node2D" parent="asteroid"]
+material = SubResource( 25 )
+position = Vector2( 0, 56 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Node2D" parent="asteroid/healthbar"]
+
+[node name="Sprite" type="Sprite" parent="asteroid/healthbar/Background"]
+position = Vector2( -97, 9.53674e-07 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid/healthbar/Background"]
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 11.75, 1.53846 )
+texture = ExtResource( 10 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid/healthbar/Background"]
+position = Vector2( 97, 0 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 6 )
+
+[node name="Empty" type="Node2D" parent="asteroid/healthbar"]
+modulate = Color( 100, 100, 100, 1 )
+
+[node name="Sprite" type="Sprite" parent="asteroid/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( -84, -1.90735e-06 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 14 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( 0.499989, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid/healthbar/Empty"]
+position = Vector2( 85, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 9 )
+
+[node name="Health" type="Node2D" parent="asteroid/healthbar"]
+material = SubResource( 26 )
+position = Vector2( -87, 0 )
+
+[node name="Sprite" type="Sprite" parent="asteroid/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 3, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 11 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 87.5, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 172, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 8 )
+
+[node name="asteroid2" type="Node2D" parent="."]
+material = SubResource( 23 )
+position = Vector2( 328, 320 )
+script = SubResource( 28 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="asteroid2"]
+material = SubResource( 24 )
+use_parent_material = true
+texture = ExtResource( 15 )
+
+[node name="healthbar" type="Node2D" parent="asteroid2"]
+material = SubResource( 25 )
+position = Vector2( 0, 56 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Node2D" parent="asteroid2/healthbar"]
+
+[node name="Sprite" type="Sprite" parent="asteroid2/healthbar/Background"]
+position = Vector2( -97, 9.53674e-07 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid2/healthbar/Background"]
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 11.75, 1.53846 )
+texture = ExtResource( 10 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid2/healthbar/Background"]
+position = Vector2( 97, 0 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 6 )
+
+[node name="Empty" type="Node2D" parent="asteroid2/healthbar"]
+modulate = Color( 100, 100, 100, 1 )
+
+[node name="Sprite" type="Sprite" parent="asteroid2/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( -84, -1.90735e-06 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 14 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid2/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( 0.499989, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid2/healthbar/Empty"]
+position = Vector2( 85, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 9 )
+
+[node name="Health" type="Node2D" parent="asteroid2/healthbar"]
+material = SubResource( 26 )
+position = Vector2( -87, 0 )
+
+[node name="Sprite" type="Sprite" parent="asteroid2/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 3, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 11 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid2/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 87.5, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid2/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 172, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 8 )
+
+[node name="asteroid3" type="Node2D" parent="."]
+material = SubResource( 23 )
+position = Vector2( 464, 432 )
+script = SubResource( 29 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="asteroid3"]
+material = SubResource( 24 )
+use_parent_material = true
+texture = ExtResource( 16 )
+
+[node name="healthbar" type="Node2D" parent="asteroid3"]
+material = SubResource( 25 )
+position = Vector2( 0, 56 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Node2D" parent="asteroid3/healthbar"]
+
+[node name="Sprite" type="Sprite" parent="asteroid3/healthbar/Background"]
+position = Vector2( -97, 9.53674e-07 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid3/healthbar/Background"]
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 11.75, 1.53846 )
+texture = ExtResource( 10 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid3/healthbar/Background"]
+position = Vector2( 97, 0 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 6 )
+
+[node name="Empty" type="Node2D" parent="asteroid3/healthbar"]
+modulate = Color( 100, 100, 100, 1 )
+
+[node name="Sprite" type="Sprite" parent="asteroid3/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( -84, -1.90735e-06 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 14 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid3/healthbar/Empty"]
+use_parent_material = true
+position = Vector2( 0.499989, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid3/healthbar/Empty"]
+position = Vector2( 85, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 9 )
+
+[node name="Health" type="Node2D" parent="asteroid3/healthbar"]
+material = SubResource( 26 )
+position = Vector2( -87, 0 )
+
+[node name="Sprite" type="Sprite" parent="asteroid3/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 3, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 11 )
+
+[node name="Sprite2" type="Sprite" parent="asteroid3/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 87.5, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 4 )
+
+[node name="Sprite3" type="Sprite" parent="asteroid3/healthbar/Health"]
+modulate = Color( 1, 100, 1, 1 )
+position = Vector2( 172, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 8 )
+
+[node name="Mouse" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Mouse"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse/Area2D"]
+shape = SubResource( 21 )
+
+[node name="Sprite" type="Sprite" parent="Mouse"]
+modulate = Color( 2, 2, 2, 1 )
+material = SubResource( 22 )
+
+[node name="Node2D" type="Node2D" parent="Mouse"]
