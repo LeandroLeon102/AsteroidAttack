@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/healthbar.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_right.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_mid.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_left.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_mid.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_left.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_left.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_white_mid.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_shadow_right.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Images/uipack-space/PNG/barHorizontal_green_right.png" type="Texture" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 1
+
+[node name="healthbar" type="Node2D"]
+material = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( -97, 9.53674e-07 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="Background"]
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 11.75, 1.53846 )
+texture = ExtResource( 8 )
+
+[node name="Sprite3" type="Sprite" parent="Background"]
+position = Vector2( 97, 0 )
+scale = Vector2( 1, 1.53846 )
+texture = ExtResource( 2 )
+
+[node name="Empty" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Empty"]
+position = Vector2( -84, -1.90735e-06 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="Empty"]
+position = Vector2( 0.499989, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3" type="Sprite" parent="Empty"]
+position = Vector2( 85, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 9 )
+
+[node name="Health" type="Node2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( -87, 0 )
+
+[node name="Sprite" type="Sprite" parent="Health"]
+position = Vector2( 3, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="Health"]
+position = Vector2( 87.5, 0 )
+scale = Vector2( 10.1875, 0.769231 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="Health"]
+position = Vector2( 172, 0 )
+scale = Vector2( 1, 0.769231 )
+texture = ExtResource( 10 )
