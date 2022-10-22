@@ -1,9 +1,11 @@
 [Details]
 
 There are 2 versions of the game:
-- v1.0: the first version of the game, has been released and no longer under development. It was created for the #KenneyJam2021 and got ranking 8th.
+- v1.0(KenneyJam2021): the first version of the game, has been released and no longer under development. It was created for the #KenneyJam2021 and got ranking 8th.
 
-- v1.x: still at development, adding new content, beautiful art and more stylized menus. also new tipes of enemies and reworking the wave generation.
+- v1.x(AsteroidAttack): still at development, adding new content, beautiful art and more stylized menus. also new tipes of enemies and reworking the wave generation.
+
+* check the other branches to see the versions
 
 * If you want to access the v1.0 version of the game, then follow this link: https://leo102.itch.io/asteroidattackkenneyjam
 
