@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemies/EnemyShipUFORed.gd" type="Script" id=1]
-[ext_resource path="res://Source/Images/Player/ufoRed.png" type="Texture" id=2]
+[ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
 [ext_resource path="res://Bullets/BulletRed.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 44.1475
+radius = 21.0238
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -42,10 +42,9 @@ tracks/0/keys = {
 [node name="EnemyShipUFO1" type="RigidBody2D" groups=["Enemies"]]
 position = Vector2( 619, 345 )
 collision_layer = 2
-collision_mask = 3
-mass = 300.0
+mode = 1
+mass = 15.0
 contacts_reported = 100
-contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
 __meta__ = {
@@ -55,6 +54,7 @@ bullets = ExtResource( 3 )
 bullet_streams = 30
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.025, 0.025 )
 z_index = 1
 texture = ExtResource( 2 )
 

@@ -66,6 +66,7 @@ var asteroid_info = {
 	}
 }
 
+
 func _ready():
 
 	randomize()
@@ -144,9 +145,12 @@ func spawn_explosion(position:Vector2=Vector2.ZERO):
 	explosion.start(position)
 	
 	
-func spawn_bullet(bullet, position, direction):
+func spawn_bullet(bullet, position, direction, speed=null):
 	var b = bullet.instance()
+	if speed:
+		b.speed = speed
 	b.start_at(position, direction)
+	
 	$Containers/Bullets.add_child(b)
 
 	

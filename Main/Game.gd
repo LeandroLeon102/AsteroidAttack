@@ -19,7 +19,8 @@ func _ready():
 	main = get_tree().get_nodes_in_group('Main')[0]
 	camera = get_tree().get_nodes_in_group('Camera')[0]
 	camera.zoom_in()
-	player = main.spawn_player(Vector2(500, 320))
+	player = main.spawn_player(Vector2(640, 360 + 100))
+	enemy_container.add_child(load("res://Enemies/EnemyShipUFORed.tscn").instance())
 	player_path = player.get_path()
 	var _connection = $Advises/AnimationPlayer.connect("animation_finished", self, 'generate_new_wave')
 	new_wave(wave)
@@ -99,7 +100,7 @@ func generate_new_wave(_anim):
 		match enemy_type:
 			'asteroids':
 				for size in enemy_list[enemy_type].keys():
-					print(enemy_list[enemy_type][size])
+#					print(enemy_list[enemy_type][size])
 					for x in range(enemy_list[enemy_type][size]):
 						var pos = randomize_mob_spawn_position()
 						main.spawn_asteroid(pos, size, Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
