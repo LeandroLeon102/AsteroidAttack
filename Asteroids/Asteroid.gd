@@ -14,6 +14,7 @@ var game
 export var limits = [Vector2.ZERO, Vector2.ZERO]
 
 func _ready():
+	add_to_group('Asteroid')
 	add_to_group('Enemies')
 	main = get_tree().get_nodes_in_group('Main')[0]
 	game = get_tree().get_nodes_in_group('Game')[0]
@@ -53,7 +54,7 @@ func take_damage(amount):
 
 func explode():
 	main.call_deferred('spawn_explosion', global_position)
-	game.call_deferred('asteroid_exploded', self)
+	game.call_deferred('enemy_exploded', self)
 	healthbar.queue_free()
 	queue_free()
 

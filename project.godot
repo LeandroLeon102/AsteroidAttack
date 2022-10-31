@@ -81,6 +81,7 @@ view_enemy={
 2d_physics/layer_3="player bullets"
 2d_physics/layer_4="enemie bullets"
 2d_physics/layer_5="powerups"
+2d_physics/layer_6="player hitbox"
 2d_physics/layer_7="player limits"
 2d_physics/layer_8="borders impulse"
 

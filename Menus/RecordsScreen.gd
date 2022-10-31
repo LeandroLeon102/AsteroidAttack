@@ -1,8 +1,17 @@
 extends Node
 
+export (PackedScene) var RecordEntry
 
 func _ready():
+	randomize()
 	$Control/Back.grab_focus()
+	for i in range(10):
+		var record = RecordEntry.instance()
+		record.set_number(i+1)
+		record.set_name('leandro')
+		record.set_wave(randi()%30)
+		record.set_score(randi()%9999)
+		$Control/Panel/RecordEntriesContainer/VBoxContainer.add_child(record)
 
 func play_hide():
 	$AnimationPlayer.play("hide")

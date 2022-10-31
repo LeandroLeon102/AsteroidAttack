@@ -97,6 +97,10 @@ text = "Back"
 icon = ExtResource( 2 )
 flat = true
 
+[node name="LinkButton" type="LinkButton" parent="Control"]
+margin_right = 40.0
+margin_bottom = 48.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
 anims/RESET = SubResource( 1 )

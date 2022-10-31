@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
+[ext_resource path="res://Source/Images/Player/ufoGreen.svg" type="Texture" id=2]
 [ext_resource path="res://Source/Images/Player/pivot.svg" type="Texture" id=3]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=4]
 [ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]

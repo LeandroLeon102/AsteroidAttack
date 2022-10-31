@@ -215,9 +215,9 @@ anims/zoom_out = SubResource( 4 )
 
 [node name="HealthBars" type="Node" parent="Containers"]
 
-[node name="Enemies" type="Node" parent="Containers" groups=["EnemiesContainer"]]
-
 [node name="Bullets" type="Node" parent="Containers"]
+
+[node name="Enemies" type="Node" parent="Containers" groups=["EnemiesContainer"]]
 
 [node name="Explosions" type="Node" parent="Containers"]
 

@@ -20,6 +20,8 @@ var healthbar
 var main
 var game
 
+var score = 200
+
 enum {BITRIALS, CIRCLE, ROTFOUR}
 
 func set_atack_mode(mode):
@@ -42,20 +44,21 @@ func set_atack_mode(mode):
 			bullet_velocity = 400
 		
 		ROTFOUR:
-			bullet_streams = 6
-			bullet_per_stream = 100
-			rotation_increment = .5
-			rotation_alternate = true
-			$ShootDelay.wait_time = 0.1
+			bullet_streams = 4
+			bullet_per_stream = 30
+			rotation_increment = .2
+			rotation_alternate = false
+			$ShootDelay.wait_time = 0.2
 			$ShootTimer.wait_time = 2
 			bullet_velocity = 50
 
 
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	$Position2D.rotation += rotation_increment
 
-func spawn_bullet(bullet, position, direction, speed=null):
+func spawn_bullet(bullet, _position, direction, speed=null):
 
 	var b = bullet.instance()
 	b.speed = bullet_velocity
@@ -81,6 +84,8 @@ func take_damage(amount):
 
 
 func explode():
+	if game:
+		game.enemy_exploded(self)
 	if main:
 		main.call_deferred('spawn_explosion', global_position)
 

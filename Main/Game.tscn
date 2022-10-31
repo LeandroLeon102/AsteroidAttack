@@ -153,7 +153,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_vertical_guides_": [ -50.0, 640.0 ]
 }
-wave = 8
 
 [node name="BordersImpulse" type="Node" parent="."]
 

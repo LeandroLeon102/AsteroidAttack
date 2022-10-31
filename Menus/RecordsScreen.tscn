@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menus/RecordsScreen.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/UI/return.png" type="Texture" id=2]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=3]
+[ext_resource path="res://Source/Images/UI/metalPanel_plate.png" type="Texture" id=4]
+[ext_resource path="res://Menus/RecordEntry.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "RESET"
@@ -74,8 +76,18 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 80, 80 )
+margin_left = 7.0
+margin_right = 7.0
+margin_top = 7.0
+margin_bottom = 7.0
+modulate_color = Color( 0, 0.741176, 1, 0.211765 )
+
 [node name="RecordsScreen" type="Node"]
 script = ExtResource( 1 )
+RecordEntry = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
@@ -95,6 +107,37 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Panel" type="Panel" parent="Control"]
+use_parent_material = true
+margin_left = 100.0
+margin_top = 68.0
+margin_right = 1080.0
+margin_bottom = 520.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+use_parent_material = true
+margin_right = 980.0
+margin_bottom = 48.0
+
+[node name="RecordEntry" parent="Control/Panel/VBoxContainer" instance=ExtResource( 5 )]
+
+[node name="HSeparator" type="HSeparator" parent="Control/Panel"]
+use_parent_material = true
+margin_left = 20.0
+margin_top = 52.0
+margin_right = 960.0
+margin_bottom = 56.0
+
+[node name="RecordEntriesContainer" type="ScrollContainer" parent="Control/Panel"]
+use_parent_material = true
+margin_top = 58.0
+margin_right = 980.0
+margin_bottom = 452.0
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/RecordEntriesContainer"]
+
 [node name="Back" type="Button" parent="Control"]
 use_parent_material = true
 anchor_top = 1.0
@@ -104,6 +147,15 @@ margin_right = 176.0
 text = "Back"
 icon = ExtResource( 2 )
 flat = true
+
+[node name="Label" type="Label" parent="Control"]
+use_parent_material = true
+margin_top = 10.0
+margin_right = 1180.0
+margin_bottom = 58.0
+text = "Leaderboard"
+align = 1
+valign = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="Control/Back" to="." method="_on_Button_pressed"]

@@ -3,19 +3,23 @@
 [sub_resource type="GDScript" id=1]
 resource_name = "test"
 script/source = "extends Node
-var wave_points:float
+var wave_points = 2.4
 
 func _ready():
-
-
-	for i in range(50):
-		wave_points = (i+1.0)*2.4
-		print([int(wave_points / 2.4)  ,
-		   int(wave_points / 4) ,
-		   int(wave_points / 6) ,
-		   int(wave_points / 10),
-		   1 * ((i+1)/5) if (i+1) % 5 == 0 else 0,
-				])
+	randomize()
+	for wave in range(101):
+		print( Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
+#
+#		var wave_total_points = wave_points * float(wave)
+#
+#		var enemy_list = {
+#							'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
+#										'small':int(wave_total_points / 4),
+#										'med':int(wave_total_points / 6) ,
+#										'big':int(wave_total_points / 10)},
+#							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
+#
+#		print({'wave': wave, 'enemylist': enemy_list})
 "
 
 [node name="Node" type="Node"]

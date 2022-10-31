@@ -28,6 +28,7 @@ func set_max_health(amount):
 	
 func set_health(amount):
 	health = float(healthbar_width) / float(max_health) * float(amount)
+	health = clamp(health, 0, 1000)
 	$Health.scale.x = health
 	if health <= .2:
 		$Health.modulate = Color(255, 0, 0)

@@ -31,8 +31,12 @@ func _on_Exit_pressed():
 
 
 func _on_Records_pressed():
-	get_tree().get_nodes_in_group('Main')[0].records_screen()
+	pass
 
 
 func _on_Information_pressed():
 	get_tree().get_nodes_in_group('Main')[0].information_screen()
+
+
+func _on_Leaderboard_pressed():
+	get_tree().get_nodes_in_group('Main')[0].records_screen()

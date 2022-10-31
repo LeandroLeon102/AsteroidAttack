@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemies/EnemyShipUFORed.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
 [ext_resource path="res://Bullets/BulletRed.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=4]
+[ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.0238
@@ -39,8 +41,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="EnemyShipUFO1" type="RigidBody2D" groups=["Enemies"]]
-position = Vector2( 619, 345 )
+[node name="EnemyShipUFO1" type="RigidBody2D" groups=["Enemies", "UFO"]]
 collision_layer = 2
 mode = 1
 mass = 15.0
@@ -51,9 +52,9 @@ __meta__ = {
 "_edit_group_": true
 }
 bullets = ExtResource( 3 )
-bullet_streams = 30
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 4 )
 scale = Vector2( 0.025, 0.025 )
 z_index = 1
 texture = ExtResource( 2 )
@@ -75,6 +76,11 @@ anims/RESET = SubResource( 2 )
 anims/rotating = SubResource( 3 )
 
 [node name="Position2D" type="Position2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 0.5
+range_height = 50.0
 
 [connection signal="timeout" from="ShootDelay" to="." method="_on_ShootDelay_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

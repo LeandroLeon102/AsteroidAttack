@@ -56,27 +56,32 @@ func _physics_process(_delta):
 			change_camera_target('player')
 
 
-func asteroid_exploded(asteroid):
-	score += asteroid.mass
-	match asteroid.size:
-		'big':
-			for _i in range(2):
+func enemy_exploded(enemy):
 
-				randomize()
-				main.spawn_asteroid(asteroid.global_position, 'med', Vector2(asteroid.mass * mass_multiplier, asteroid.mass * mass_multiplier ).rotated(randi()% 180/PI))
-		'med':
-			for _i in range(2):
-				randomize()
-				main.spawn_asteroid(asteroid.global_position, 'small', Vector2(asteroid.mass * mass_multiplier, asteroid.mass * mass_multiplier ).rotated(randi()% 180/PI))
-		'small':
-			for _i in range(2):
-				randomize()
-				main.spawn_asteroid(asteroid.global_position, 'tiny', Vector2(asteroid.mass * mass_multiplier,asteroid.mass * mass_multiplier ).rotated(randi()% 180/PI))
-		'tiny':
-			pass
-	if randf() <= main.asteroid_info['drop_rate'][asteroid.size]:
-		main.spawn_powerup(asteroid.global_position, 'health')
+	if enemy.is_in_group('Asteroid'):
+		score += enemy.mass
+		match enemy.size:
+			'big':
+				for _i in range(2):
 
+					randomize()
+					main.spawn_asteroid(enemy.global_position, 'med', Vector2(enemy.mass * mass_multiplier, enemy.mass * mass_multiplier ).rotated(randi()% 180/PI))
+			'med':
+				for _i in range(2):
+					randomize()
+					main.spawn_asteroid(enemy.global_position, 'small', Vector2(enemy.mass * mass_multiplier, enemy.mass * mass_multiplier ).rotated(randi()% 180/PI))
+			'small':
+				for _i in range(2):
+					randomize()
+					main.spawn_asteroid(enemy.global_position, 'tiny', Vector2(enemy.mass * mass_multiplier,enemy.mass * mass_multiplier ).rotated(randi()% 180/PI))
+			'tiny':
+				pass
+		if randf() <= main.asteroid_info['drop_rate'][enemy.size]:
+			main.spawn_powerup(enemy.global_position, 'health')
+	if enemy.is_in_group('UFO'):
+		score += enemy.score
+		
+		
 
 func new_wave(current_wave):
 
@@ -101,9 +106,9 @@ func generate_new_wave(_anim):
 			'asteroids':
 				for size in enemy_list[enemy_type].keys():
 #					print(enemy_list[enemy_type][size])
-					for x in range(enemy_list[enemy_type][size]):
+					for _x in range(enemy_list[enemy_type][size]):
 						var pos = randomize_mob_spawn_position()
-						main.spawn_asteroid(pos, size, Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
+						main.spawn_asteroid(pos, size, Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
 						
 			'ships':
 				pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Source/Images/UI/trophy.png" type="Texture" id=5]
 [ext_resource path="res://Source/Images/UI/information.png" type="Texture" id=6]
 [ext_resource path="res://Menus/MainMenu.gd" type="Script" id=7]
+[ext_resource path="res://Source/Images/UI/leaderboardsComplex.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFontData" id=10]
 font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
@@ -125,7 +126,7 @@ margin_right = 509.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 250, 0 )
 focus_neighbour_top = NodePath("../Exit")
-focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
 focus_neighbour_bottom = NodePath("../Settings")
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -141,7 +142,7 @@ margin_right = 509.0
 margin_bottom = 175.0
 rect_min_size = Vector2( 250, 0 )
 focus_neighbour_top = NodePath("../Play")
-focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
 focus_neighbour_bottom = NodePath("../Exit")
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -157,7 +158,7 @@ margin_right = 509.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 250, 0 )
 focus_neighbour_top = NodePath("../Settings")
-focus_neighbour_right = NodePath("../../VBoxContainer2/Records")
+focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
 focus_neighbour_bottom = NodePath("../Play")
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -176,25 +177,38 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Records" type="Button" parent="Control/VBoxContainer2"]
+[node name="Leaderboard" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
 use_parent_material = true
 margin_left = 28.0
-margin_top = 33.0
+margin_top = 4.0
 margin_right = 78.0
-margin_bottom = 83.0
+margin_bottom = 54.0
 rect_clip_content = true
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
 focus_neighbour_top = NodePath("../Information")
 focus_neighbour_bottom = NodePath("../Information")
 size_flags_horizontal = 8
 size_flags_vertical = 10
-icon = ExtResource( 5 )
+icon = ExtResource( 8 )
 flat = true
 icon_align = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="Records" type="Button" parent="Control/VBoxContainer2"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+use_parent_material = true
+margin_left = 28.0
+margin_top = 62.0
+margin_right = 78.0
+margin_bottom = 112.0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
 
 [node name="Information" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
@@ -204,8 +218,8 @@ margin_top = 120.0
 margin_right = 78.0
 margin_bottom = 170.0
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
-focus_neighbour_top = NodePath("../Records")
-focus_neighbour_bottom = NodePath("../Records")
+focus_neighbour_top = NodePath("../Leaderboard")
+focus_neighbour_bottom = NodePath("../Leaderboard")
 size_flags_horizontal = 8
 size_flags_vertical = 10
 icon = ExtResource( 6 )
@@ -225,5 +239,6 @@ anims/show = SubResource( 3 )
 [connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/Leaderboard" to="." method="_on_Leaderboard_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Records" to="." method="_on_Records_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]

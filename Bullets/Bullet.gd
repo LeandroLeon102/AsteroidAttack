@@ -4,14 +4,24 @@ export var damage = 0
 export var speed = 0
 export (AudioStream) var ExplodeSound
 
+export var screen_out_check = false
+export var viewport_out_check = false
+export var play_explode_sound = false
+
 var vel = Vector2.ZERO
 var rot = 0
 var active = true
 var main 
 func _ready():
 	randomize()
-#	main = get_tree().get_nodes_in_group('Main')[0]
-#	add_to_group('bullet')
+	if screen_out_check:
+		var _connection = $VisibilityNotifier2D.connect('screen_exited', self, '_on_VisibilityNotifier2D_screen_exited')
+	if viewport_out_check:
+		var _connection = $VisibilityNotifier2D.connect("viewport_exited", self, '_on_VisibilityNotifier2D_viewport_exited')
+	main = get_tree().get_nodes_in_group('Main')
+	if main:
+		main = main[0]
+	add_to_group('Bullet')
 
 
 func _physics_process(delta):
@@ -25,11 +35,13 @@ func start_at(pos, dir):
 
 
 func explode():
-#	main.play_sfx(ExplodeSound, global_position, -5, rand_range(.95, 1.05))
+	if play_explode_sound:
+		if main:
+			main.play_sfx(ExplodeSound, global_position, -5, rand_range(.95, 1.05))
 	queue_free()
 
 
-func _on_VisibilityNotifier2D_screen_exited():
+func _ona_VisibilityNotifier2D_screen_exited():
 	if active:
 		explode()
 		active = false
@@ -46,3 +58,9 @@ func _on_Bullet_body_entered(body):
 	if active:
 		explode()
 		active = false
+
+
+func _on_Bullet_area_entered(area):
+	if area.is_in_group('Bullet'):
+		area.explode()	
+		explode()

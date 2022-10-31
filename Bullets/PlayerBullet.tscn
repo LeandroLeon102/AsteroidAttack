@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=3]
+[ext_resource path="res://Source/Images/Bullets/laserGreen01.svg" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=3]
 interpolation_mode = 2
@@ -33,35 +33,34 @@ color_ramp = SubResource( 4 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 4.0
-height = 32.0
+height = 14.0
 
 [node name="PlayerBullet" instance=ExtResource( 1 )]
-material = ExtResource( 3 )
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 damage = 10
 speed = 1000
+viewport_out_check = true
+play_explode_sound = true
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color( 2, 1.7, 1.7, 1 )
-use_parent_material = true
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="VisibilityNotifier2D" parent="." index="1"]
-use_parent_material = true
-scale = Vector2( 2.7, 0.45 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Particles2D" parent="." index="2"]
-use_parent_material = true
+modulate = Color( 0.5, 10, 0.5, 1 )
 visibility_rect = Rect2( -2.99501, -2.97735, 5.97362, 5.9768 )
 local_coords = false
 process_material = SubResource( 7 )
 
 [node name="CollisionShape2D" parent="." index="3"]
-use_parent_material = true
+position = Vector2( 15, 0 )
 shape = SubResource( 2 )
