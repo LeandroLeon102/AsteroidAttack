@@ -15,6 +15,8 @@ var PlayerBullet = preload("res://Bullets/PlayerBullet.tscn")
 var HealthBar = preload("res://Healthbar/HealthBar.tscn")
 var HealthPowerUp = preload("res://PowerUps/HealthPowerup.tscn")
 var SoundEffect = preload("res://SFX/SoundEffect.tscn")
+var ShipUFO = preload("res://Enemies/EnemyShipUFORed.tscn")
+
 onready var EnemiesContainer = $Containers/Enemies
 
 
@@ -66,9 +68,12 @@ var asteroid_info = {
 	}
 }
 
+var enemy_ships_info = {
+	'drop_rate':.7
+}
 
 func _ready():
-
+	Settings.check_settings_file()
 	randomize()
 	main_menu()
 
@@ -81,7 +86,7 @@ func play_sfx(stream:AudioStream, position:Vector2=Vector2.ZERO, volume:float=0.
 	sound.pitch_scale = pitch
 	sound.global_position = position
 	$Containers/Sounds.add_child(sound)
-	
+
 
 func spawn(spawnee=null):
 	if spawnee:
@@ -123,7 +128,10 @@ func spawn_player(position:Vector2=Vector2.ZERO):
 	
 	
 func spawn_enemy(_position:Vector2=Vector2.ZERO, _type='ship'):
-	pass
+	var e = ShipUFO.instance()
+	e.global_position = _position
+
+	$Containers/Enemies.add_child(e)
 	
 	
 func spawn_powerup(position:Vector2=Vector2.ZERO, type='health'):

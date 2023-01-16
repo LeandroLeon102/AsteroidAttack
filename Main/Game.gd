@@ -20,12 +20,11 @@ func _ready():
 	camera = get_tree().get_nodes_in_group('Camera')[0]
 	camera.zoom_in()
 	player = main.spawn_player(Vector2(640, 360 + 100))
-	enemy_container.add_child(load("res://Enemies/EnemyShipUFORed.tscn").instance())
+
 	player_path = player.get_path()
+	player.connect('GameOver', self, 'game_over')
 	var _connection = $Advises/AnimationPlayer.connect("animation_finished", self, 'generate_new_wave')
 	new_wave(wave)
-	
-
 
 func _physics_process(_delta):
 	$HUD.set_score(score)
@@ -36,9 +35,9 @@ func _physics_process(_delta):
 			on_wave = false
 			new_wave(wave)
 	if get_node_or_null(player_path):
-		$HUD/Node2D/HealthBar.set_health(player.health)
+		$HUD/UI/HealthBar.set_health(player.health)
 	else:
-		$HUD/Node2D/HealthBar.set_health(0)
+		$HUD/UI/HealthBar.set_health(0)
 	if Input.is_action_just_pressed("view_enemy"):
 
 		if camera.get_target():
@@ -50,11 +49,12 @@ func _physics_process(_delta):
 
 		if camera.get_target():
 			if camera.get_target().is_in_group('Enemies'):
-				player.block_actions(false)
-				change_camera_target('player')
+				if player:
+
+					player.block_actions(false)
+					change_camera_target('player')
 		else:
 			change_camera_target('player')
-
 
 func enemy_exploded(enemy):
 
@@ -80,15 +80,14 @@ func enemy_exploded(enemy):
 			main.spawn_powerup(enemy.global_position, 'health')
 	if enemy.is_in_group('UFO'):
 		score += enemy.score
-		
-		
+		if randf() <= main.enemy_ships_info['drop_rate']:
+			main.spawn_powerup(enemy.global_position, 'health')
 
 func new_wave(current_wave):
-
 	wave = current_wave +1
 	$HUD.set_wave_number(wave)
 	$Advises.show_central_advice('Wave ' + str(wave))
-
+	on_wave= false
 
 func generate_new_wave(_anim):
 	var wave_total_points = wave_points * float(wave)
@@ -100,10 +99,11 @@ func generate_new_wave(_anim):
 									'big':int(wave_total_points / 10)},
 						'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
 	
-#	print(enemy_list)
+
 	for enemy_type in enemy_list.keys():
 		match enemy_type:
 			'asteroids':
+
 				for size in enemy_list[enemy_type].keys():
 #					print(enemy_list[enemy_type][size])
 					for _x in range(enemy_list[enemy_type][size]):
@@ -111,7 +111,11 @@ func generate_new_wave(_anim):
 						main.spawn_asteroid(pos, size, Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
 						
 			'ships':
-				pass
+				for _x in range(enemy_list['ships']):
+					var pos = randomize_mob_spawn_position()
+					main.spawn_enemy(pos)
+
+					
 #	for i in range(enemy_list['asteroids']['tiny']):
 #		var pos = randomize_mob_spawn_position()
 #		main.spawn_asteroid(pos, 'tiny', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
@@ -131,7 +135,6 @@ func generate_new_wave(_anim):
 	
 	on_wave = true
 
-
 func randomize_mob_spawn_position():
 	mob_spawn_range.unit_offset = rand_range(0, 1)
 	return mob_spawn_range.position
@@ -144,11 +147,30 @@ func change_camera_target(target):
 			camera.set_target($Advises/Position2D.get_path())
 		'enemy':
 			camera.set_target(enemy_container.get_children()[0].get_path() if enemy_container.get_child_count() else null)
-			
+		_:
+			camera.set_target(target.get_path())
 
 func block_player_actions(value:bool):
-	if player:
+	if is_instance_valid(player):
 		if value:
+			
 			player.block_actions(true)
 		else:
+
 			player.block_actions(false)
+
+
+func player_invulnerable(value:bool):
+		if is_instance_valid(player):
+			player.vulnerable(value)
+
+func end_game():
+	if player:
+		player.explode()
+	$HUD/PauseMenu.queue_free()
+
+
+func game_over():
+	$HUD/UI.visible = false
+	$Advises.show_central_advice('GAME OVER')
+	$HUD/PauseMenu.queue_free()

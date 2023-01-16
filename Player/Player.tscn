@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/Player/ufoGreen.svg" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=4]
 [ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]
 [ext_resource path="res://Bullets/PlayerBullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Bullets/GodBullet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Source/Images/Player/ufoBlue.svg" type="Texture" id=8]
 
 [sub_resource type="PhysicsMaterial" id=4]
 
@@ -60,7 +62,10 @@ __meta__ = {
 }
 max_velocity = 20
 acceleration = 20
-bullets = ExtResource( 6 )
+NORMAL_BULLETS = ExtResource( 6 )
+GOD_BULLLETS = ExtResource( 7 )
+GOD_SKIN = ExtResource( 8 )
+NORMAL_SKIN = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true

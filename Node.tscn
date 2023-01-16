@@ -6,20 +6,18 @@ script/source = "extends Node
 var wave_points = 2.4
 
 func _ready():
-	randomize()
-	for wave in range(101):
-		print( Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
-#
-#		var wave_total_points = wave_points * float(wave)
-#
-#		var enemy_list = {
-#							'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
-#										'small':int(wave_total_points / 4),
-#										'med':int(wave_total_points / 6) ,
-#										'big':int(wave_total_points / 10)},
-#							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
-#
-#		print({'wave': wave, 'enemylist': enemy_list})
+	for i in range(100):
+		var wave = i
+		var wave_total_points = wave_points * float(wave)
+
+		var enemy_list = {
+							'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
+										'small':int(wave_total_points / 4),
+										'med':int(wave_total_points / 6) ,
+										'big':int(wave_total_points / 10)},
+							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
+		
+		print(\"Wave: %s, %s\" % [wave, enemy_list])
 "
 
 [node name="Node" type="Node"]
