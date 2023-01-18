@@ -14,10 +14,10 @@ var active = true
 var main 
 func _ready():
 	randomize()
-	if screen_out_check:
-		var _connection = $VisibilityNotifier2D.connect('screen_exited', self, '_on_VisibilityNotifier2D_screen_exited')
-	if viewport_out_check:
-		var _connection = $VisibilityNotifier2D.connect("viewport_exited", self, '_on_VisibilityNotifier2D_viewport_exited')
+#	if screen_out_check:
+#		var _connection = $VisibilityNotifier2D.connect('screen_exited', self, '_on_VisibilityNotifier2D_screen_exited')
+#	if viewport_out_check:
+#		var _connection = $VisibilityNotifier2D.connect("viewport_exited", self, '_on_VisibilityNotifier2D_viewport_exited')
 	main = get_tree().get_nodes_in_group('Main')
 	if main:
 		main = main[0]
@@ -26,7 +26,11 @@ func _ready():
 
 func _physics_process(delta):
 	global_position += vel * delta
+	if active and viewport_out_check:
+		if global_position.x > ProjectSettings.get("display/window/size/width") + 50 or global_position.x < 0 - 50 or global_position.y > ProjectSettings.get("display/window/size/height") + 50 or global_position.y < 0 - 50:
 
+			explode()
+			active = false
 
 func start_at(pos, dir):
 	rotation = dir * PI/180
@@ -41,17 +45,11 @@ func explode():
 	queue_free()
 
 
-func _ona_VisibilityNotifier2D_screen_exited():
-	if active:
+func _on_VisibilityNotifier2D_screen_exited():
+
+	if active and screen_out_check:
 		explode()
 		active = false
-
-
-func _on_VisibilityNotifier2D_viewport_exited(_viewport):
-	if active:
-		explode()
-		active = false
-
 
 func _on_Bullet_body_entered(body):
 	body.take_damage(damage)

@@ -58,7 +58,6 @@ func set_atack_mode(mode):
 			set_atack_mode(randi() % 4)
 
 func _physics_process(_delta):
-
 	$Position2D.rotation += rotation_increment
 	if not arrived: 
 		shooting = false
@@ -85,10 +84,9 @@ func _ready():
 	game = get_tree().get_nodes_in_group('Game')
 	if game:
 		game = game[0]
-	set_atack_mode(ROTFOUR)
+	set_atack_mode(RANDOM)
 	var viewport_size = get_viewport().size
 	var rand = Vector2(randi() % int(viewport_size.x - margin * 2 ) + margin, randi() % int(viewport_size.y - margin * 2) + margin)
-	print(rand)
 	target_pos = rand
 
 

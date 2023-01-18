@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Enemies/EnemyShipUFORed.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
 [ext_resource path="res://Bullets/BulletRed.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=4]
 [ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]
+[ext_resource path="res://Player/Trail.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.0238
@@ -53,15 +54,19 @@ __meta__ = {
 }
 bullets = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 4 )
-scale = Vector2( 0.025, 0.025 )
-z_index = 1
-texture = ExtResource( 2 )
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 0.5
+range_height = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 4 )
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 2 )
 
 [node name="ShootDelay" type="Timer" parent="."]
 process_mode = 0
@@ -78,10 +83,9 @@ anims/rotating = SubResource( 3 )
 
 [node name="Position2D" type="Position2D" parent="."]
 
-[node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 5 )
-texture_scale = 0.5
-range_height = 50.0
+[node name="Trail" parent="." instance=ExtResource( 6 )]
+modulate = Color( 1, 0.5, 0.5, 0.33 )
+lenght = 60
 
 [connection signal="timeout" from="ShootDelay" to="." method="_on_ShootDelay_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

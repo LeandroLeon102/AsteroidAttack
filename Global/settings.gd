@@ -13,7 +13,7 @@ func save_settings():
 func check_settings_file():
 	var directory = Directory.new();
 	var doFileExists = directory.file_exists(str(OS.get_user_data_dir())+'/config/settings.cfg')
-	print(doFileExists)
+
 	if not doFileExists:
 		create_settings_file()
 

@@ -21,16 +21,13 @@ func _ready():
 	contact_monitor = true
 	contacts_reported = 1000
 	var _connection = connect("body_entered", self, 'body_entered')
-
 	extents = ($Sprite.texture.get_size() / 2) * 0.05
 	limits = [
 		[int(0-extents.x-5), int(1280+extents.x+5)],
 		[int(0-extents.y-5), int(720+extents.y+5)]]
 
-
 func _physics_process(_delta):
 	keep_on_screen()
-
 	if linear_velocity.x > -3 and linear_velocity.x < 3:
 		linear_velocity.x = linear_velocity.x * 2
 	if linear_velocity.y > -3 and linear_velocity.y < 3:

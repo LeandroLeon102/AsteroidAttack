@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
@@ -15,6 +15,22 @@ font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
 [sub_resource type="DynamicFont" id=9]
 size = 64
 font_data = SubResource( 10 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "HIDDEN"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1280, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "RESET"
@@ -228,6 +244,7 @@ icon_align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
+anims/HIDDEN = SubResource( 11 )
 anims/RESET = SubResource( 1 )
 anims/hide = SubResource( 2 )
 anims/show = SubResource( 3 )

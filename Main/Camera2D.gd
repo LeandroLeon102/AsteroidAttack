@@ -1,6 +1,10 @@
 extends Camera2D
 var target setget set_target, get_target
 var path = null
+var locked = false
+
+func lock_camera(value:bool):
+	locked = value
 
 func _physics_process(_delta):
 	if get_target():
@@ -14,8 +18,9 @@ func zoom_out():
 	$AnimationPlayer.play("zoom_out")
 	
 func set_target(path_to_node):
-	path = path_to_node
-	target = get_target()
+	if not locked:
+		path = path_to_node
+		target = get_target()
 	
 
 func get_target():

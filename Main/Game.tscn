@@ -115,7 +115,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 2.5 ),
+"times": PoolRealArray( 0, 2.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ "advice" ],
@@ -132,9 +132,21 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [ true ],
+"method": "block_player_actions"
+}, {
+"args": [ true ],
+"method": "block_player_actions"
+}, {
+"args": [ true ],
+"method": "block_player_actions"
+}, {
+"args": [ true ],
+"method": "block_player_actions"
+}, {
 "args": [ true ],
 "method": "block_player_actions"
 }, {
@@ -149,14 +161,43 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [ true ],
+"method": "player_invulnerable"
+}, {
+"args": [ true ],
+"method": "player_invulnerable"
+}, {
+"args": [ true ],
+"method": "player_invulnerable"
+}, {
+"args": [ true ],
+"method": "player_invulnerable"
+}, {
 "args": [ true ],
 "method": "player_invulnerable"
 }, {
 "args": [ false ],
 "method": "player_invulnerable"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "lock_camera"
+}, {
+"args": [ false ],
+"method": "lock_camera"
 } ]
 }
 
@@ -170,7 +211,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_vertical_guides_": [ -50.0, 640.0 ]
 }
-wave = 5
 
 [node name="BordersImpulse" type="Node" parent="."]
 
@@ -441,6 +481,92 @@ margin_right = 40.0
 text = "main menu"
 icon_align = 1
 
+[node name="Score" type="Control" parent="HUD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Score"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.498039 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Score"]
+margin_top = 21.0
+margin_right = 1280.0
+margin_bottom = 158.0
+
+[node name="ScoreText" type="Label" parent="HUD/Score/VBoxContainer2"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_right = 1280.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 13 )
+text = "Score"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScoreCount" type="Label" parent="HUD/Score/VBoxContainer2"]
+modulate = Color( 10, 10, 10, 1 )
+material = ExtResource( 2 )
+margin_top = 53.0
+margin_right = 1280.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 11 )
+text = "0"
+align = 1
+autowrap = true
+max_lines_visible = 2
+
+[node name="LineEdit" type="LineEdit" parent="HUD/Score"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -29.0
+margin_bottom = 29.0
+align = 1
+max_length = 10
+placeholder_text = "TYPE YOUR NAME"
+placeholder_alpha = 0.5
+caret_blink = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Score"]
+margin_top = 537.0
+margin_right = 1280.0
+margin_bottom = 695.0
+
+[node name="WaveText" type="Label" parent="HUD/Score/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 77.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 22 )
+text = "Wave"
+align = 1
+valign = 2
+
+[node name="WaveCount" type="Label" parent="HUD/Score/VBoxContainer"]
+margin_top = 81.0
+margin_right = 1280.0
+margin_bottom = 158.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 24 )
+text = "0"
+align = 1
+valign = 2
+autowrap = true
+clip_text = true
+
 [node name="Advises" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -471,3 +597,4 @@ position = Vector2( -200, -200 )
 loop = false
 
 [connection signal="pressed" from="HUD/PauseMenu/Button" to="HUD" method="_on_Button_pressed"]
+[connection signal="text_entered" from="HUD/Score/LineEdit" to="." method="_on_LineEdit_text_entered"]

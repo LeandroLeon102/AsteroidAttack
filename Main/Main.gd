@@ -17,6 +17,8 @@ var HealthPowerUp = preload("res://PowerUps/HealthPowerup.tscn")
 var SoundEffect = preload("res://SFX/SoundEffect.tscn")
 var ShipUFO = preload("res://Enemies/EnemyShipUFORed.tscn")
 
+
+var game_ended = false
 onready var EnemiesContainer = $Containers/Enemies
 
 
@@ -77,9 +79,9 @@ func _ready():
 	randomize()
 	main_menu()
 
-
+func _process(delta):
+	pass
 func play_sfx(stream:AudioStream, position:Vector2=Vector2.ZERO, volume:float=0.0, pitch:float=1):
-	
 	var sound = SoundEffect.instance()
 	sound.stream = stream
 	sound.volume_db = volume
@@ -118,8 +120,6 @@ func spawn_asteroid(position:Vector2=Vector2.ZERO, size:String='random', vel = V
 	vel = Vector2(vel.x - asteroid.mass if vel.x != 0 else 0, vel.y - asteroid.mass if vel.y != 0 else 0)
 	asteroid.set_linear_velocity(vel)
 
-
-
 func spawn_player(position:Vector2=Vector2.ZERO):
 	var p = Player.instance()
 	p.position = position
@@ -141,9 +141,6 @@ func spawn_powerup(position:Vector2=Vector2.ZERO, type='health'):
 			powerup = HealthPowerUp.instance()
 			powerup.global_position = position
 			$Containers/PowerUps.add_child(powerup)
-
-
-		
 
 
 func spawn_explosion(position:Vector2=Vector2.ZERO):
@@ -177,10 +174,9 @@ func main_menu():
 	
 
 func start_new_game():
-
+	game_ended = false
 	clean_containers()
 	change_scene(Game)
-
 	$MusicPlayer.volume_db = -5
 	
 	
@@ -190,11 +186,10 @@ func settings_menu():
 	$Scene.add_child(s)
 	s.play_show()
 
-	
-
 func records_screen():
 	var s = RecordsScreen.instance()
-	$Scene.get_child(0).play_hide()
+	if not $Scene.get_child(0).is_in_group('Game'):
+		$Scene.get_child(0).play_hide()
 	$Scene.add_child(s)
 	s.play_show()
 
@@ -220,3 +215,8 @@ func clean_containers():
 	for container in $Containers.get_children():
 		for child in container.get_children():
 			container.remove_child(child)
+
+func GameEnded():
+	game_ended = true
+#func _process(delta):
+#	print($Containers/Bullets.get_child_count())

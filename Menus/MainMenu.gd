@@ -17,7 +17,11 @@ func play_hide():
 func play_show():
 	$AnimationPlayer.play("show")
 	focused = true
-
+	
+func play_hidden():
+	$AnimationPlayer.play("HIDDEN")
+	focused = false
+	
 func _on_Play_pressed():
 	get_tree().get_nodes_in_group('Main')[0].start_new_game()
 	

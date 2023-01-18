@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=19 format=2]
 
 [ext_resource path="res://Source/VFX/Fonts/PixelThinFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Source/Images/UI/square_shadow.png" type="Texture" id=3]
@@ -32,6 +32,16 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 0.333333 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 20
+
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 80, 80 )
@@ -55,6 +65,9 @@ CheckBox/icons/checked = ExtResource( 4 )
 CheckBox/icons/radio_checked = ExtResource( 6 )
 CheckBox/icons/radio_unchecked = ExtResource( 7 )
 CheckBox/icons/unchecked = ExtResource( 3 )
+LineEdit/styles/focus = SubResource( 8 )
+LineEdit/styles/normal = SubResource( 9 )
+LineEdit/styles/read_only = SubResource( 9 )
 Panel/styles/panel = SubResource( 1 )
 PopupMenu/icons/checked = ExtResource( 4 )
 PopupMenu/icons/radio_checked = ExtResource( 6 )

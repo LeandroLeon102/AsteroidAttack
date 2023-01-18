@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Menus/RecordsScreen.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/UI/return.png" type="Texture" id=2]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=3]
 [ext_resource path="res://Source/Images/UI/metalPanel_plate.png" type="Texture" id=4]
 [ext_resource path="res://Menus/RecordEntry.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menus/MainMenu.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "RESET"
@@ -85,9 +86,10 @@ margin_top = 7.0
 margin_bottom = 7.0
 modulate_color = Color( 0, 0.741176, 1, 0.211765 )
 
-[node name="RecordsScreen" type="Node"]
+[node name="RecordsScreen" type="Node" groups=["RecordsScreen"]]
 script = ExtResource( 1 )
 RecordEntry = ExtResource( 5 )
+MainMenu = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

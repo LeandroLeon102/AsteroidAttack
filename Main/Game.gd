@@ -13,6 +13,8 @@ var wave_points = 2.4
 var on_wave
 var score = 0
 
+var game_ended
+
 func _ready():
 	randomize()
 	enemy_container = get_tree().get_nodes_in_group('EnemiesContainer')[0]
@@ -27,39 +29,46 @@ func _ready():
 	new_wave(wave)
 
 func _physics_process(_delta):
-	$HUD.set_score(score)
-	var enemy_count = main.EnemiesContainer.get_child_count()
-	$HUD.set_enemy_number(enemy_count)
-	if enemy_count == 0:
-		if on_wave:
-			on_wave = false
-			new_wave(wave)
-	if get_node_or_null(player_path):
-		$HUD/UI/HealthBar.set_health(player.health)
+	if game_ended:
+		if enemy_container.get_child_count():
+			enemy_container.get_child(0).explode()
 	else:
-		$HUD/UI/HealthBar.set_health(0)
-	if Input.is_action_just_pressed("view_enemy"):
+		$HUD.set_score(score)
+		var enemy_count = main.EnemiesContainer.get_child_count()
+		$HUD.set_enemy_number(enemy_count)
+		if enemy_count == 0 and not game_ended:
 
-		if camera.get_target():
-			if camera.get_target().is_in_group('Player'):
-				player.block_actions(true)
-				change_camera_target('enemy')
+			if on_wave:
+				on_wave = false
+				new_wave(wave)
 
-	if Input.is_action_just_released("view_enemy"):
-
-		if camera.get_target():
-			if camera.get_target().is_in_group('Enemies'):
-				if player:
-
-					player.block_actions(false)
-					change_camera_target('player')
+		if get_node_or_null(player_path):
+			$HUD/UI/HealthBar.set_health(player.health)
 		else:
-			change_camera_target('player')
+			$HUD/UI/HealthBar.set_health(0)
+		
+		if Input.is_action_pressed("view_enemy"):
+			if get_tree().get_nodes_in_group('EnemiesContainer')[0].get_children():
+				if get_tree().get_nodes_in_group('PlayerContainer')[0].get_children():
+					if not camera.locked:
+						player.block_actions(true)
+						change_camera_target('enemy')
+				else:
+					change_camera_target('advice')
+		if Input.is_action_just_released("view_enemy"):
+			if get_tree().get_nodes_in_group('PlayerContainer')[0].get_children():
+				if not camera.locked:
+						player.block_actions(false)
+						change_camera_target('player')
+			
+			else:
+					change_camera_target('advice')
 
 func enemy_exploded(enemy):
-
+	
 	if enemy.is_in_group('Asteroid'):
-		score += enemy.mass
+		if not game_ended:
+			score += enemy.mass
 		match enemy.size:
 			'big':
 				for _i in range(2):
@@ -76,64 +85,42 @@ func enemy_exploded(enemy):
 					main.spawn_asteroid(enemy.global_position, 'tiny', Vector2(enemy.mass * mass_multiplier,enemy.mass * mass_multiplier ).rotated(randi()% 180/PI))
 			'tiny':
 				pass
-		if randf() <= main.asteroid_info['drop_rate'][enemy.size]:
+		if randf() <= main.asteroid_info['drop_rate'][enemy.size] and not game_ended:
 			main.spawn_powerup(enemy.global_position, 'health')
 	if enemy.is_in_group('UFO'):
-		score += enemy.score
-		if randf() <= main.enemy_ships_info['drop_rate']:
-			main.spawn_powerup(enemy.global_position, 'health')
+		if not game_ended:
+			score += enemy.score
+			if randf() <= main.enemy_ships_info['drop_rate']:
+				main.spawn_powerup(enemy.global_position, 'health')
 
 func new_wave(current_wave):
-	wave = current_wave +1
-	$HUD.set_wave_number(wave)
-	$Advises.show_central_advice('Wave ' + str(wave))
-	on_wave= false
+	if not game_ended:
+		wave = current_wave +1
+		$HUD.set_wave_number(wave)
+		$Advises.show_central_advice('Wave ' + str(wave))
+		on_wave= false
 
 func generate_new_wave(_anim):
-	var wave_total_points = wave_points * float(wave)
-
-	var enemy_list = {
-						'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
-									'small':int(wave_total_points / 4),
-									'med':int(wave_total_points / 6) ,
-									'big':int(wave_total_points / 10)},
-						'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
-	
-
-	for enemy_type in enemy_list.keys():
-		match enemy_type:
-			'asteroids':
-
-				for size in enemy_list[enemy_type].keys():
-#					print(enemy_list[enemy_type][size])
-					for _x in range(enemy_list[enemy_type][size]):
+	if not game_ended:
+		var wave_total_points = wave_points * float(wave)
+		var enemy_list = {
+							'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
+										'small':int(wave_total_points / 4),
+										'med':int(wave_total_points / 6) ,
+										'big':int(wave_total_points / 10)},
+							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
+		for enemy_type in enemy_list.keys():
+			match enemy_type:
+				'asteroids':
+					for size in enemy_list[enemy_type].keys():
+						for _x in range(enemy_list[enemy_type][size]):
+							var pos = randomize_mob_spawn_position()
+							main.spawn_asteroid(pos, size, Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
+				'ships':
+					for _x in range(enemy_list['ships']):
 						var pos = randomize_mob_spawn_position()
-						main.spawn_asteroid(pos, size, Vector2(rand_range(-120, 120),rand_range(-120, 120)).rotated(deg2rad(randi()%360)))
-						
-			'ships':
-				for _x in range(enemy_list['ships']):
-					var pos = randomize_mob_spawn_position()
-					main.spawn_enemy(pos)
-
-					
-#	for i in range(enemy_list['asteroids']['tiny']):
-#		var pos = randomize_mob_spawn_position()
-#		main.spawn_asteroid(pos, 'tiny', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
-#	for i in range(int(wave_total_points / 4)):
-#		var pos = randomize_mob_spawn_position()
-#		main.spawn_asteroid(pos, 'small', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
-#	for i in range(int(wave_total_points / 6)):
-#		var pos = randomize_mob_spawn_position()
-#		main.spawn_asteroid(pos, 'med', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
-#	for i in range(int(wave_total_points / 10)):
-#		var pos = randomize_mob_spawn_position()
-#		main.spawn_asteroid(pos, 'big', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
-#	for i in range(int(wave_total_points / 2.4) % 10):
-#		var pos = randomize_mob_spawn_position()
-#		main.spawn_asteroid(pos, 'tiny', Vector2(rand_range(60, 120),rand_range(60, 120)).rotated(deg2rad(randi()%360)))
-
-	
-	on_wave = true
+						main.spawn_enemy(pos)
+		on_wave = true
 
 func randomize_mob_spawn_position():
 	mob_spawn_range.unit_offset = rand_range(0, 1)
@@ -142,11 +129,12 @@ func randomize_mob_spawn_position():
 func change_camera_target(target):
 	match target:
 		'player': 
-			camera.set_target(player_path)
+			if get_tree().get_nodes_in_group('PlayerContainer')[0].get_children():
+				camera.set_target(get_tree().get_nodes_in_group('PlayerContainer')[0].get_children()[0].get_path())
 		'advice':
 			camera.set_target($Advises/Position2D.get_path())
 		'enemy':
-			camera.set_target(enemy_container.get_children()[0].get_path() if enemy_container.get_child_count() else null)
+			camera.set_target(get_tree().get_nodes_in_group('EnemiesContainer')[0].get_children()[0].get_path())
 		_:
 			camera.set_target(target.get_path())
 
@@ -159,18 +147,36 @@ func block_player_actions(value:bool):
 
 			player.block_actions(false)
 
-
 func player_invulnerable(value:bool):
 		if is_instance_valid(player):
 			player.vulnerable(value)
 
 func end_game():
-	if player:
+	game_ended = true
+	if get_tree().get_nodes_in_group('PlayerContainer')[0].get_child_count():
 		player.explode()
 	$HUD/PauseMenu.queue_free()
-
+	game_over()
 
 func game_over():
 	$HUD/UI.visible = false
+	
 	$Advises.show_central_advice('GAME OVER')
+	game_ended = true
+	camera.zoom_out()
+	$Advises/AnimationPlayer.connect("animation_finished", self, 'show_score_screen')
 	$HUD/PauseMenu.queue_free()
+
+func show_score_screen(_anim):
+	$HUD/Score/VBoxContainer2/ScoreCount.text = str(score)
+	$HUD/Score/VBoxContainer/WaveCount.text = str(wave)
+	$HUD/Score.visible = true
+
+	
+func lock_camera(value:bool):
+	camera.lock_camera(value)
+
+
+func _on_LineEdit_text_entered(new_text):
+	main.records_screen()
+	queue_free()

@@ -22,13 +22,9 @@ func _process(delta):
 			else:
 				$UI.visible = true
 				$PauseMenu.visible = false
-		
-		
-
 
 func set_wave_number(wave):
 	$UI/WaveCount.text = str(wave)
-	
 
 func set_enemy_number(number):
 	enemy_number = number
@@ -57,5 +53,5 @@ func _on_Button_pressed():
 	$UI.visible = false
 	$PauseMenu.visible = false
 	paused = false
-	get_tree().set_pause(false)
+	get_tree().set_pause(paused)
 	get_parent().end_game()

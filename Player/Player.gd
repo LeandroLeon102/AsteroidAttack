@@ -30,14 +30,10 @@ export var invulnerable = false
 export var can_move = true
 export var can_shoot = true
 
-
 func _ready():
 	camera = get_tree().get_nodes_in_group('Camera')[0]
 	main = get_tree().get_nodes_in_group('Main')[0]
 	game = get_tree().get_nodes_in_group('Game')[0]
-	
-	
-
 
 func _physics_process(_delta):
 	if god: 
