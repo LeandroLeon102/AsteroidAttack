@@ -10,7 +10,7 @@ offsets = PoolRealArray( 0.00558659, 0.837989 )
 colors = PoolColorArray( 5, 5, 5, 1, 5, 5, 5, 0 )
 
 [node name="Trail" type="Line2D"]
-modulate = Color( 1, 1, 1, 0.333333 )
+modulate = Color( 1, 1, 1, 0.2 )
 width = 40.0
 width_curve = SubResource( 6 )
 default_color = Color( 5, 5, 5, 0.33 )

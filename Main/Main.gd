@@ -1,8 +1,11 @@
 extends Node
 
 signal Spawned
-
+export (float, -20 ,10.0) var MUSIC_VOLUME_MIN
+export (float, -20 ,10.0) var MUSIC_VOLUME_MAX
 export (AudioStream) var ExplosionSound
+var LEADERBOARD = []
+
 
 var MainMenu = preload("res://Menus/MainMenu.tscn")
 var Game = preload("res://Main/Game.tscn")
@@ -20,6 +23,7 @@ var ShipUFO = preload("res://Enemies/EnemyShipUFORed.tscn")
 
 var game_ended = false
 onready var EnemiesContainer = $Containers/Enemies
+onready var httpRequest  = $HTTPRequest
 
 
 var powerup_info = {
@@ -75,20 +79,24 @@ var enemy_ships_info = {
 }
 
 func _ready():
-	Settings.check_settings_file()
 	randomize()
 	main_menu()
 
-func _process(delta):
-	pass
-func play_sfx(stream:AudioStream, position:Vector2=Vector2.ZERO, volume:float=0.0, pitch:float=1):
+#func _process(delta):
+#	print($Containers/Explosions.get_child_count())
+
+func play_sfx(stream:AudioStream, position:Vector2=Vector2.ZERO, volume:float=0.0, pitch:float=1, backwards:bool=false):
 	var sound = SoundEffect.instance()
 	sound.stream = stream
 	sound.volume_db = volume
 	sound.pitch_scale = pitch
 	sound.global_position = position
+	if backwards:
+		sound.autoplay = false
+		
 	$Containers/Sounds.add_child(sound)
-
+	if backwards:
+		sound.play(stream.get_length())
 
 func spawn(spawnee=null):
 	if spawnee:
@@ -167,17 +175,24 @@ func load_scene(path):
 	var scene = load(path)
 	return scene
 
+func play_info_animation(anim):
+	$CanvasLayer2/Control/AnimationPlayer2.play(anim)
+	return $CanvasLayer2/Control/AnimationPlayer2
+
+func stop_info_anim():
+	$CanvasLayer2/Control/AnimationPlayer2.stop()
 
 func main_menu():
 	change_scene(MainMenu)
-	$MusicPlayer.volume_db = 0
+	$MusicPlayer.volume_db = MUSIC_VOLUME_MAX
+
 	
 
 func start_new_game():
 	game_ended = false
 	clean_containers()
 	change_scene(Game)
-	$MusicPlayer.volume_db = -5
+	$MusicPlayer.volume_db = MUSIC_VOLUME_MIN
 	
 	
 func settings_menu():
@@ -186,11 +201,34 @@ func settings_menu():
 	$Scene.add_child(s)
 	s.play_show()
 
-func records_screen():
+func records_screen(data=null):
+	if not LootLocker.token:
+		yield(LootLocker.authenticate_guest_session(), 'completed')
+	yield(LootLocker.get_board(), 'completed')
 	var s = RecordsScreen.instance()
-	if not $Scene.get_child(0).is_in_group('Game'):
+	var leaderboard_copy = LEADERBOARD.duplicate()
+	if LootLocker.board != null:
+		leaderboard_copy.append_array(LootLocker.board.duplicate())
+		if data != null:
+			LEADERBOARD.append(data)
+			leaderboard_copy.append_array(LEADERBOARD)
+			if leaderboard_copy.find(data, 0) < 100:
+			
+				yield(LootLocker.submit_records(data), 'completed')
+	else:
+		if data != null:
+			
+			LEADERBOARD.append(data)
+			leaderboard_copy.append_array(LEADERBOARD)
+
+		
+	leaderboard_copy.sort_custom(customSorter, 'sort')
+			
+			
+	if $Scene.get_children():
 		$Scene.get_child(0).play_hide()
 	$Scene.add_child(s)
+	s.update_records(leaderboard_copy, data)
 	s.play_show()
 
 
@@ -218,5 +256,33 @@ func clean_containers():
 
 func GameEnded():
 	game_ended = true
-#func _process(delta):
-#	print($Containers/Bullets.get_child_count())
+	
+func restore_music_volume():
+	$MusicPlayer.volume_db = MUSIC_VOLUME_MAX
+
+#func update_records(data):
+#	if data != null:
+#		yield(LootLocker.get_board(), 'completed')
+#		var leaderboard =  LootLocker.board.duplicate()
+#		leaderboard.append(data)
+#		LEADERBOARD.sort_custom(customSorter, 'sort')
+#		LEADERBOARD.append(data)
+
+#		if data['score'] >= LOCAL_RECORDS[0]['score']:
+#			LOCAL_RECORDS.sort_custom(customSorter, 'sort')
+#			MAX_RECORD = data
+#			return true
+#		else:
+#			LOCAL_RECORDS.sort_custom(customSorter, 'sort')
+#
+#			return false
+
+
+class customSorter:
+	static func sort(a, b):
+		if a != null and b != null:
+			if a['score'] > b['score']:
+				return true
+			return false
+		else:
+			return false

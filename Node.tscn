@@ -6,10 +6,16 @@ script/source = "extends Node
 var wave_points = 2.4
 
 func _ready():
-	for i in range(100):
+	var txt = ''
+	for i in range(32):
+		txt += str('F')
+	print(txt)
+	
+
+func generate_waves(num):
+	for i in range(num):
 		var wave = i
 		var wave_total_points = wave_points * float(wave)
-
 		var enemy_list = {
 							'asteroids':{'tiny':int(wave_total_points / 2.4) %10,
 										'small':int(wave_total_points / 4),
@@ -18,6 +24,19 @@ func _ready():
 							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
 		
 		print(\"Wave: %s, %s\" % [wave, enemy_list])
+		
+#func _process(delta):
+#
+#	var RANALOGX = InputEventJoypadMotion.new()
+#	RANALOGX.set_axis(JOY_ANALOG_RX)
+#	print(RANALOGX.get_axis())
+#
+##	var RANALOGY = InputEventJoypadMotion.new().set_axis(JOY_ANALOG_RY)
+#	print(Vector2(RANALOGX.get_axis_value(), RANALOGY.get_axis_value))
+#func _input(event):
+#	var velocity = Input.get_vector(\"aim_left\", \"aim_right\", \"aim_up\", \"aim_down\")
+#	print(velocity)
+
 "
 
 [node name="Node" type="Node"]

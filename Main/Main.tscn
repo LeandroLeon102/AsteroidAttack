@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Main/Main.gd" type="Script" id=2]
 [ext_resource path="res://Source/SFX/House In a Forest Loop.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Main/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://Source/SFX/lowFrequency_explosion_000.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=19]
 light_mode = 1
@@ -170,8 +171,228 @@ scale = 2.0
 scale_curve = SubResource( 14 )
 color_ramp = SubResource( 12 )
 
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel2:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "authenticating_session"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Reaching Server", "Reaching Server.", "Reaching Server..", "Reaching Server..." ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "done"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Done", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel2:rect_scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "error"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "can't, reach server", "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel2:rect_scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "pop_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel2:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel2/Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "" ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "retrieving_leaderboard"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel2/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "retrieving leaderboard", "retrieving leaderboard.", "retrieving leaderboard..", "retrieving leaderboard..." ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="Main" type="Node" groups=["Main"]]
 script = ExtResource( 2 )
+MUSIC_VOLUME_MIN = -10.0
+MUSIC_VOLUME_MAX = -5.0
+ExplosionSound = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -252,7 +473,7 @@ anims/zoom_out = SubResource( 4 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." groups=["Music"]]
 stream = ExtResource( 3 )
 autoplay = true
 bus = "Music"
@@ -294,3 +515,36 @@ explosiveness = 0.1
 randomness = 1.0
 visibility_rect = Rect2( -49.0881, -377.206, 50.0531, 754.237 )
 process_material = SubResource( 18 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel2" type="Panel" parent="CanvasLayer2/Control"]
+margin_left = 290.0
+margin_top = 310.0
+margin_right = 990.0
+margin_bottom = 410.0
+rect_min_size = Vector2( 700, 100 )
+rect_pivot_offset = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="CanvasLayer2/Control/Panel2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 1
+align = 1
+valign = 1
+uppercase = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="CanvasLayer2/Control"]
+anims/RESET = SubResource( 20 )
+anims/authenticating_session = SubResource( 21 )
+anims/done = SubResource( 22 )
+anims/error = SubResource( 24 )
+anims/pop_in = SubResource( 23 )
+anims/retrieving_leaderboard = SubResource( 25 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

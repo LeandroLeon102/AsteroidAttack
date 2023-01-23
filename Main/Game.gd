@@ -5,6 +5,9 @@ var enemy_container
 var player = null
 var player_path
 var camera
+
+export (AudioStream) var NEW_WAVE_SOUND
+export (float, -20 ,10.0) var NEW_WAVE_VOLUME
 export var mass_multiplier = 1.7
 onready var mob_spawn_range = $MobSpawnRange/PathFollow2D
 
@@ -27,7 +30,7 @@ func _ready():
 	player.connect('GameOver', self, 'game_over')
 	var _connection = $Advises/AnimationPlayer.connect("animation_finished", self, 'generate_new_wave')
 	new_wave(wave)
-
+	
 func _physics_process(_delta):
 	if game_ended:
 		if enemy_container.get_child_count():
@@ -98,6 +101,7 @@ func new_wave(current_wave):
 		wave = current_wave +1
 		$HUD.set_wave_number(wave)
 		$Advises.show_central_advice('Wave ' + str(wave))
+		main.play_sfx(NEW_WAVE_SOUND, $Advises/Position2D.global_position, NEW_WAVE_VOLUME, .85)
 		on_wave= false
 
 func generate_new_wave(_anim):
@@ -178,5 +182,11 @@ func lock_camera(value:bool):
 
 
 func _on_LineEdit_text_entered(new_text):
-	main.records_screen()
+	var data = {
+		'score': score,
+
+		'metadata':'{"wave":"{}", "name": "{}"}'.format([str(wave), str(new_text)], "{}")
+	
+}
+	main.records_screen(data)
 	queue_free()

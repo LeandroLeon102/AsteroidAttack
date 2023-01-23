@@ -1,8 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Menus/InformationScreen.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/UI/return.png" type="Texture" id=2]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=3]
+[ext_resource path="res://Source/Images/UI/metalPanel_plate.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 80, 80 )
+margin_left = 7.0
+margin_right = 7.0
+margin_top = 7.0
+margin_bottom = 7.0
+modulate_color = Color( 0, 0.741176, 1, 0.211765 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -85,6 +95,16 @@ margin_left = 1330.0
 margin_top = 50.0
 margin_right = 2510.0
 margin_bottom = 670.0
+
+[node name="Panel" type="Panel" parent="Control"]
+margin_left = 100.0
+margin_top = 84.0
+margin_right = 1080.0
+margin_bottom = 536.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Back" type="Button" parent="Control"]
 use_parent_material = true

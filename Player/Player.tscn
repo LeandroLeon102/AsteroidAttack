@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/Player/ufoGreen.svg" type="Texture" id=2]
@@ -9,11 +9,10 @@
 [ext_resource path="res://Bullets/GodBullet.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Source/Images/Player/ufoBlue.svg" type="Texture" id=8]
 [ext_resource path="res://Player/Trail.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Source/SFX/laserRetro_002.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Source/SFX/hitHurt.wav" type="AudioStream" id=11]
 
 [sub_resource type="PhysicsMaterial" id=4]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 20.6155
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -50,6 +49,9 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 22.0227
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.6155
+
 [node name="Player" type="RigidBody2D" groups=["Player"]]
 material = ExtResource( 4 )
 collision_mask = 218
@@ -61,16 +63,15 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+BULLETS_VOLUME = -10.0
 max_velocity = 20
 acceleration = 20
+LASER_SOUND = ExtResource( 10 )
+HIT_SOUND = ExtResource( 11 )
 NORMAL_BULLETS = ExtResource( 6 )
 GOD_BULLLETS = ExtResource( 7 )
 GOD_SKIN = ExtResource( 8 )
 NORMAL_SKIN = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-use_parent_material = true
-shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "rotating"
@@ -118,11 +119,18 @@ one_shot = true
 [node name="Hurt" type="Tween" parent="."]
 
 [node name="Trail" parent="." instance=ExtResource( 9 )]
-modulate = Color( 0.5, 1, 0.5, 0.33 )
+modulate = Color( 0.501961, 1, 0.501961, 0.2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 use_parent_material = true
 scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+use_parent_material = true
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+pitch_scale = 1.05
 
 [connection signal="tween_completed" from="Hurt" to="." method="_on_Hurt_tween_completed"]

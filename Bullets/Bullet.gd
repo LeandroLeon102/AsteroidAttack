@@ -1,5 +1,5 @@
 extends Area2D
-
+export (float, -20 ,10.0) var EXPLOSION_VOLUME
 export var damage = 0
 export var speed = 0
 export (AudioStream) var ExplodeSound
@@ -14,10 +14,6 @@ var active = true
 var main 
 func _ready():
 	randomize()
-#	if screen_out_check:
-#		var _connection = $VisibilityNotifier2D.connect('screen_exited', self, '_on_VisibilityNotifier2D_screen_exited')
-#	if viewport_out_check:
-#		var _connection = $VisibilityNotifier2D.connect("viewport_exited", self, '_on_VisibilityNotifier2D_viewport_exited')
 	main = get_tree().get_nodes_in_group('Main')
 	if main:
 		main = main[0]
@@ -41,7 +37,7 @@ func start_at(pos, dir):
 func explode():
 	if play_explode_sound:
 		if main:
-			main.play_sfx(ExplodeSound, global_position, -5, rand_range(.95, 1.05))
+			main.play_sfx(ExplodeSound, global_position, EXPLOSION_VOLUME, rand_range(.95, 1.05))
 	queue_free()
 
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
 [ext_resource path="res://Source/Images/UI/forward.png" type="Texture" id=3]
 [ext_resource path="res://Source/Images/UI/wrench.png" type="Texture" id=4]
-[ext_resource path="res://Source/Images/UI/trophy.png" type="Texture" id=5]
 [ext_resource path="res://Source/Images/UI/information.png" type="Texture" id=6]
 [ext_resource path="res://Menus/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Source/Images/UI/leaderboardsComplex.png" type="Texture" id=8]
@@ -196,16 +195,14 @@ __meta__ = {
 [node name="Leaderboard" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
 use_parent_material = true
-margin_left = 28.0
-margin_top = 4.0
 margin_right = 78.0
-margin_bottom = 54.0
+margin_bottom = 83.0
 rect_clip_content = true
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
 focus_neighbour_top = NodePath("../Information")
 focus_neighbour_bottom = NodePath("../Information")
-size_flags_horizontal = 8
-size_flags_vertical = 10
+size_flags_horizontal = 15
+size_flags_vertical = 15
 icon = ExtResource( 8 )
 flat = true
 icon_align = 1
@@ -213,31 +210,17 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Records" type="Button" parent="Control/VBoxContainer2"]
-modulate = Color( 1.5, 1.5, 1.5, 1 )
-use_parent_material = true
-margin_left = 28.0
-margin_top = 62.0
-margin_right = 78.0
-margin_bottom = 112.0
-size_flags_horizontal = 8
-size_flags_vertical = 10
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-
 [node name="Information" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
 use_parent_material = true
-margin_left = 28.0
-margin_top = 120.0
+margin_top = 87.0
 margin_right = 78.0
 margin_bottom = 170.0
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
 focus_neighbour_top = NodePath("../Leaderboard")
 focus_neighbour_bottom = NodePath("../Leaderboard")
-size_flags_horizontal = 8
-size_flags_vertical = 10
+size_flags_horizontal = 15
+size_flags_vertical = 15
 icon = ExtResource( 6 )
 flat = true
 icon_align = 1
@@ -257,5 +240,4 @@ anims/show = SubResource( 3 )
 [connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Leaderboard" to="." method="_on_Leaderboard_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer2/Records" to="." method="_on_Records_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]

@@ -22,6 +22,9 @@ func _process(delta):
 			else:
 				$UI.visible = true
 				$PauseMenu.visible = false
+	if paused:
+		if Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_accept"):
+			$PauseMenu/Button.grab_focus()  
 
 func set_wave_number(wave):
 	$UI/WaveCount.text = str(wave)

@@ -1,6 +1,9 @@
 extends RigidBody2D
+
+export (float, -20 ,10.0) var SPAWN_VOLUME
 export var max_health = 150
 
+export (AudioStream) var SPAWN_SOUND
 export (PackedScene) var bullets
 export var bullet_streams = 4
 export var bullet_per_stream = 1
@@ -80,12 +83,14 @@ func _ready():
 	main = get_tree().get_nodes_in_group('Main')
 	if main:
 		main = main[0]
-	
+		main.play_sfx(SPAWN_SOUND, global_position, SPAWN_VOLUME , 1)
 	game = get_tree().get_nodes_in_group('Game')
 	if game:
 		game = game[0]
 	set_atack_mode(RANDOM)
 	var viewport_size = get_viewport().size
+
+	
 	var rand = Vector2(randi() % int(viewport_size.x - margin * 2 ) + margin, randi() % int(viewport_size.y - margin * 2) + margin)
 	target_pos = rand
 

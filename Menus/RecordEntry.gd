@@ -24,3 +24,8 @@ func set_wave(wave):
 	
 func set_score(score):
 	$Score.text = str(score)
+
+func iluminate():
+	modulate = Color(0.1, 5, 0,1)
+	for c in get_children():
+		c.modulate = Color(0.1,5, 0 ,1)

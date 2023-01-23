@@ -42,6 +42,7 @@ material = ExtResource( 4 )
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
+EXPLOSION_VOLUME = -10.0
 ExplodeSound = ExtResource( 3 )
 play_explode_sound = true
 
