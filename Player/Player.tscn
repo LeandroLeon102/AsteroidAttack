@@ -64,6 +64,7 @@ __meta__ = {
 "_edit_group_": true
 }
 BULLETS_VOLUME = -10.0
+god = true
 max_velocity = 20
 acceleration = 20
 LASER_SOUND = ExtResource( 10 )
@@ -113,7 +114,7 @@ wait_time = 0.15
 one_shot = true
 
 [node name="AutoShootDelay" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.25
 one_shot = true
 
 [node name="Hurt" type="Tween" parent="."]

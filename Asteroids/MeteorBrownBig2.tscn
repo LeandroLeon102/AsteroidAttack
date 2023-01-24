@@ -25,3 +25,7 @@ normal_map = ExtResource( 4 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 use_parent_material = true
 polygon = PoolVector2Array( 52, -26.1, 41.2, 14, -9, 26.3, -27.8, 39.5, -49, 23, -53.6, -7, -34.8, -36, 2, -43.2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -50, -50 )
+rect = Rect2( 0, 0, 100, 100 )

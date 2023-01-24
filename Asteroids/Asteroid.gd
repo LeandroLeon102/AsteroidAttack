@@ -13,7 +13,16 @@ var main
 var game
 export var limits = [Vector2.ZERO, Vector2.ZERO]
 
+var visibility_check
 func _ready():
+	visible = false
+	visibility_check = VisibilityNotifier2D.new()
+	add_child(visibility_check)
+	visibility_check.connect("screen_entered", self, '_on_VisibilityNotifier2D2_screen_entered')
+	visibility_check.connect("screen_exited", self, '_on_VisibilityNotifier2D2_screen_exited')
+	visibility_check.position = Vector2(-50, -50)
+	visibility_check.rect =  Rect2( 0, 0, 100, 100 )
+	
 	add_to_group('Asteroid')
 	add_to_group('Enemies')
 	main = get_tree().get_nodes_in_group('Main')[0]
@@ -56,6 +65,7 @@ func explode():
 	queue_free()
 
 
+
 func set_initial_health(amount):
 	max_health = amount
 	health = amount
@@ -65,3 +75,10 @@ func set_initial_health(amount):
 
 func body_entered(_body):
 	pass
+
+
+func _on_VisibilityNotifier2D2_screen_exited():
+	visible = false
+	
+func _on_VisibilityNotifier2D2_screen_entered():
+	visible = true

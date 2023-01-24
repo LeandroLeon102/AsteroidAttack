@@ -15,7 +15,7 @@ dest_files=[ "res://.import/ufoRed.svg-d85ba1cdd6db967067c11657b7b838d2.stex" ]
 [params]
 
 compress/mode=0
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enemies/EnemyShipUFORed.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/Player/ufoRed.svg" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Source/VFX/Untitled2.png" type="Texture" id=5]
 [ext_resource path="res://Player/Trail.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Source/SFX/enemySpawned.wav" type="AudioStream" id=7]
+[ext_resource path="res://Source/SFX/laserRetro_002.ogg" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.0238
@@ -44,6 +45,7 @@ tracks/0/keys = {
 }
 
 [node name="EnemyShipUFO1" type="RigidBody2D" groups=["Enemies", "UFO"]]
+position = Vector2( 622, 396 )
 collision_layer = 2
 mode = 1
 mass = 15.0
@@ -55,6 +57,10 @@ __meta__ = {
 }
 SPAWN_SOUND = ExtResource( 7 )
 bullets = ExtResource( 3 )
+bullet_streams = 2
+rotation_increment = 0.306
+bullet_velocity = 1000
+SHOOT_SOUND = ExtResource( 8 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 5 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Main/Game.gd" type="Script" id=1]
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://Main/HUD.gd" type="Script" id=4]
 [ext_resource path="res://Main/Advises.gd" type="Script" id=5]
 [ext_resource path="res://Source/SFX/WaveUp.wav" type="AudioStream" id=6]
+[ext_resource path="res://joystick/virtual_joystick.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Source/Images/VirtualJoystickPack/LargeHandleFilled.png" type="Texture" id=9]
+[ext_resource path="res://Source/Images/VirtualJoystickPack/JoystickSplitted.png" type="Texture" id=10]
+[ext_resource path="res://Source/Images/VirtualJoystickPack/Joystick.png" type="Texture" id=11]
+[ext_resource path="res://Source/Images/VirtualJoystickPack/SmallHandleFilled.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 560, 100 )
@@ -71,6 +76,9 @@ font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
 [sub_resource type="DynamicFont" id=24]
 size = 56
 font_data = SubResource( 23 )
+
+[sub_resource type="CircleShape2D" id=26]
+radius = 184.71
 
 [sub_resource type="CanvasItemMaterial" id=25]
 light_mode = 1
@@ -217,7 +225,7 @@ __meta__ = {
 }
 NEW_WAVE_SOUND = ExtResource( 6 )
 NEW_WAVE_VOLUME = -7.0
-wave = 4
+wave = 91
 
 [node name="BordersImpulse" type="Node" parent="."]
 
@@ -458,6 +466,80 @@ valign = 1
 autowrap = true
 clip_text = true
 
+[node name="AimJoystick" parent="HUD/UI" groups=["AimJoystick"] instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -479.0
+margin_top = -359.0
+margin_right = -6.0
+margin_bottom = -3.0
+__meta__ = {
+"_edit_group_": true
+}
+deadzone_size = 1.0
+clampzone_size = 50.0
+joystick_mode = 1
+visibility_mode = 1
+use_input_actions = false
+
+[node name="Base" parent="HUD/UI/AimJoystick" index="0"]
+anchor_left = 0.59
+anchor_right = 0.59
+margin_left = -120.07
+margin_top = -123.0
+margin_right = 119.93
+margin_bottom = 117.0
+rect_pivot_offset = Vector2( 120, 120 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="Tip" parent="HUD/UI/AimJoystick/Base" index="0"]
+margin_left = -80.0
+margin_top = -80.0
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 8 )
+rect_pivot_offset = Vector2( 80, 80 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="HUD/UI"]
+position = Vector2( 1136, 284 )
+scale = Vector2( 0.2, 0.2 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 10 )
+shape = SubResource( 26 )
+action = "view_enemy"
+visibility_mode = 1
+
+[node name="MoveJoystick" parent="HUD/UI" groups=["MoveJoystick"] instance=ExtResource( 7 )]
+margin_left = 4.0
+margin_top = -464.0
+margin_right = 454.0
+margin_bottom = -2.0
+__meta__ = {
+"_edit_group_": true
+}
+deadzone_size = 25.0
+joystick_mode = 1
+visibility_mode = 1
+
+[node name="Base" parent="HUD/UI/MoveJoystick" index="0"]
+anchor_left = 0.427
+anchor_top = 0.632
+anchor_right = 0.427
+anchor_bottom = 0.632
+margin_left = -100.15
+margin_top = -99.984
+margin_right = 99.85
+margin_bottom = 100.016
+texture = ExtResource( 11 )
+expand = true
+
+[node name="Tip" parent="HUD/UI/MoveJoystick/Base" index="0"]
+texture = ExtResource( 12 )
+expand = true
+
 [node name="PauseMenu" type="Control" parent="HUD"]
 pause_mode = 2
 visible = false
@@ -587,6 +669,15 @@ valign = 2
 autowrap = true
 clip_text = true
 
+[node name="Button" type="Button" parent="HUD/Score"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -172.0
+margin_top = -48.0
+text = "Continue"
+
 [node name="Advises" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -600,6 +691,9 @@ text = "central advice"
 align = 1
 valign = 1
 uppercase = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Advises"]
 autoplay = "RESET"
@@ -618,3 +712,7 @@ loop = false
 
 [connection signal="pressed" from="HUD/PauseMenu/Button" to="HUD" method="_on_Button_pressed"]
 [connection signal="text_entered" from="HUD/Score/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="HUD/Score/Button" to="." method="_on_Button_pressed"]
+
+[editable path="HUD/UI/AimJoystick"]
+[editable path="HUD/UI/MoveJoystick"]

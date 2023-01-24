@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Control",
+"class": "VirtualJoystick",
+"language": "GDScript",
+"path": "res://joystick/virtual_joystick.gd"
+} ]
+_global_script_class_icons={
+"VirtualJoystick": ""
+}
+
 [application]
 
 config/name="AsteroidAtack!"
@@ -25,6 +35,7 @@ LootLocker="*res://Global/LootLocker.gd"
 
 window/size/width=1280
 window/size/height=720
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -125,6 +136,10 @@ focus_buttons={
  ]
 }
 
+[input_devices]
+
+buffering/agile_event_flushing=true
+
 [layer_names]
 
 2d_physics/layer_1="player"
@@ -139,6 +154,7 @@ focus_buttons={
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/thread_model=2
 2d/default_gravity=0
 2d/default_linear_damp=0.001
 2d/default_angular_damp=0.001
@@ -148,5 +164,6 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
+threads/thread_model=2
 batching/precision/uv_contract=true
 environment/default_environment="res://default_env.tres"

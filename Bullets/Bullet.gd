@@ -58,3 +58,11 @@ func _on_Bullet_area_entered(area):
 	if area.is_in_group('Bullet'):
 		area.explode()	
 		explode()
+
+
+func _on_VisibilityNotifier2D2_screen_exited():
+	visible = false
+
+
+func _on_VisibilityNotifier2D2_screen_entered():
+	visible = true

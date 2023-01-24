@@ -190,3 +190,15 @@ func _on_LineEdit_text_entered(new_text):
 }
 	main.records_screen(data)
 	queue_free()
+
+
+func _on_Button_pressed():
+	var new_text = $HUD/Score/LineEdit.get_text()
+	var data = {
+		'score': score,
+
+		'metadata':'{"wave":"{}", "name": "{}"}'.format([str(wave), str(new_text)], "{}")
+	
+}
+	main.records_screen(data)
+	queue_free()

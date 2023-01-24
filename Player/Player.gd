@@ -28,7 +28,7 @@ var rot
 var camera
 var main 
 var game 
-enum {MOUSE, CONTROLLER}
+enum {MOUSE, CONTROLLER, JOYSTICK}
 var AIM_MODE = MOUSE
 
 export var invulnerable = false
@@ -48,22 +48,41 @@ func _physics_process(_delta):
 		
 	match AIM_MODE:
 		MOUSE:
+			var joystick_aim = get_tree().get_nodes_in_group('AimJoystick')[0].get_output()
 			var controller_aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 			if controller_aim != Vector2.ZERO:
 				AIM_MODE = CONTROLLER
 				$pivot.look_at($pivot.global_position + controller_aim)
+			elif joystick_aim != Vector2.ZERO:
+				AIM_MODE = JOYSTICK
+				$pivot.look_at($pivot.global_position + joystick_aim)
 			else:
 				$pivot.look_at(get_global_mouse_position())
 		CONTROLLER:
+#			var joystick_aim = get_tree().get_nodes_in_group('AimJoystick')[0].get_axis()
 			if Input.is_action_just_pressed("mouse_activation"):
 				AIM_MODE = MOUSE
 				$pivot.look_at(get_global_mouse_position())
+#			elif joystick_aim != Vector2.ZERO:
+#				AIM_MODE = JOYSTICK
+#				$pivot.look_at($pivot.global_position + joystick_aim)
+			
 			else:
 				var controller_aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 				if controller_aim != Vector2.ZERO:
 					AIM_MODE = CONTROLLER
 					$pivot.look_at($pivot.global_position + controller_aim)
-
+		JOYSTICK:
+			var joystick_aim = get_tree().get_nodes_in_group('AimJoystick')[0].get_output()
+			var controller_aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
+			if controller_aim != Vector2.ZERO:
+				AIM_MODE = CONTROLLER
+				$pivot.look_at($pivot.global_position + controller_aim)
+#			if Input.is_action_just_pressed("mouse_activation"):
+#				AIM_MODE = MOUSE
+#				$pivot.look_at(get_global_mouse_position())
+			else:
+				$pivot.look_at($pivot.global_position + joystick_aim)
 	rot = $pivot.rotation * 180/PI
 	
 	var hits = $HitBox.get_overlapping_bodies()
@@ -79,14 +98,18 @@ func _integrate_forces(state):
 	var y_input = 0
 	if not god:
 		if can_move:
+
 			x_input = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 			y_input = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	else:
-		
+
 		x_input = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 		y_input = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-
-	var direction = Vector2(x_input, y_input).normalized()
+	var direction
+#	if get_tree().get_nodes_in_group('MoveJoystick')[0].get_axis() != Vector2.ZERO:
+#		direction = get_tree().get_nodes_in_group('MoveJoystick')[0].get_axis()
+#	else:
+	direction = Vector2(x_input, y_input).normalized()
 	
 	velocity = acceleration * direction
 	if not direction and velocity.length() > 1:
@@ -110,6 +133,14 @@ func _integrate_forces(state):
 			elif AIM_MODE == CONTROLLER:
 				var controller_aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 				if controller_aim != Vector2.ZERO:
+					if $AutoShootDelay.time_left == 0:
+						$ShootDelay.start()
+						$AutoShootDelay.start()
+						velocity += Vector2(-weapon_recoil, 0).rotated(rot * PI/180)
+						call_deferred('shoot')
+			elif AIM_MODE == JOYSTICK:
+				var joystick_aim = get_tree().get_nodes_in_group('AimJoystick')[0].get_output()
+				if joystick_aim != Vector2.ZERO:
 					if $AutoShootDelay.time_left == 0:
 						$ShootDelay.start()
 						$AutoShootDelay.start()

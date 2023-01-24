@@ -6,10 +6,8 @@ script/source = "extends Node
 var wave_points = 2.4
 
 func _ready():
-	var txt = ''
-	for i in range(32):
-		txt += str('F')
-	print(txt)
+	generate_waves(100)
+	
 	
 
 func generate_waves(num):
@@ -21,7 +19,7 @@ func generate_waves(num):
 										'small':int(wave_total_points / 4),
 										'med':int(wave_total_points / 6) ,
 										'big':int(wave_total_points / 10)},
-							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
+							'ships':(((wave)/5) if (wave) % 5 == 0 else 0) + (1 if (wave) % 5 != 0 and wave > 10 else 0) }
 		
 		print(\"Wave: %s, %s\" % [wave, enemy_list])
 		

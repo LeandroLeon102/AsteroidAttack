@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
 [ext_resource path="res://Source/Images/UI/forward.png" type="Texture" id=3]
-[ext_resource path="res://Source/Images/UI/wrench.png" type="Texture" id=4]
 [ext_resource path="res://Source/Images/UI/information.png" type="Texture" id=6]
 [ext_resource path="res://Menus/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Source/Images/UI/leaderboardsComplex.png" type="Texture" id=8]
@@ -138,45 +137,27 @@ modulate = Color( 2, 2, 2, 1 )
 use_parent_material = true
 margin_left = 259.0
 margin_right = 509.0
-margin_bottom = 50.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 250, 0 )
 focus_neighbour_top = NodePath("../Exit")
 focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
-focus_neighbour_bottom = NodePath("../Settings")
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 text = "Play"
 icon = ExtResource( 3 )
-
-[node name="Settings" type="Button" parent="Control/VBoxContainer"]
-modulate = Color( 2, 2, 2, 1 )
-use_parent_material = true
-margin_left = 259.0
-margin_top = 125.0
-margin_right = 509.0
-margin_bottom = 175.0
-rect_min_size = Vector2( 250, 0 )
-focus_neighbour_top = NodePath("../Play")
-focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
-focus_neighbour_bottom = NodePath("../Exit")
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Settings"
-icon = ExtResource( 4 )
 
 [node name="Exit" type="Button" parent="Control/VBoxContainer"]
 modulate = Color( 2, 2, 2, 1 )
 use_parent_material = true
 margin_left = 259.0
-margin_top = 250.0
+margin_top = 184.0
 margin_right = 509.0
-margin_bottom = 300.0
+margin_bottom = 294.0
 rect_min_size = Vector2( 250, 0 )
-focus_neighbour_top = NodePath("../Settings")
 focus_neighbour_right = NodePath("../../VBoxContainer2/Leaderboard")
 focus_neighbour_bottom = NodePath("../Play")
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 text = "Exit"
 icon = ExtResource( 2 )
 
@@ -237,7 +218,6 @@ anims/show = SubResource( 3 )
 [node name="Explosion" type="AudioStreamPlayer2D" parent="Sounds"]
 
 [connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Leaderboard" to="." method="_on_Leaderboard_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]
