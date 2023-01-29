@@ -7,7 +7,8 @@ export (AudioStream) var ExplodeSound
 export var screen_out_check = false
 export var viewport_out_check = false
 export var play_explode_sound = false
-
+export (PackedScene) var BulletPuff
+export (Color) var PuffColor = Color(1,1,1,1)
 var vel = Vector2.ZERO
 var rot = 0
 var active = true
@@ -35,14 +36,18 @@ func start_at(pos, dir):
 
 
 func explode():
+	var p = BulletPuff.instance()
+	p.modulate = PuffColor
+	p.global_position = global_position
+	main.ExplosionsContainer.add_child(p)
 	if play_explode_sound:
 		if main:
 			main.play_sfx(ExplodeSound, global_position, EXPLOSION_VOLUME, rand_range(.95, 1.05))
+	
 	queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-
 	if active and screen_out_check:
 		explode()
 		active = false

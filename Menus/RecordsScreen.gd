@@ -1,6 +1,6 @@
 extends Node
 
-export (PackedScene) var RecordEntry
+var RecordEntry = preload("res://Menus/RecordEntry.tscn")
 export (PackedScene) var MainMenu
 func _ready():
 	randomize()
@@ -63,7 +63,7 @@ func update_records(records, new_record=null):
 			pos += 1
 			$Control/Panel/RecordEntriesContainer/VBoxContainer.add_child(r)
 			
-	if records.find(new_record) > 100:
+	if records.find(new_record) > 99 and new_record != null:
 		var r = RecordEntry.instance()
 		var m  = new_record['metadata']
 		m = JSON.parse(m).get_result()

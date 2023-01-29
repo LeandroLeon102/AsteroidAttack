@@ -225,7 +225,6 @@ __meta__ = {
 }
 NEW_WAVE_SOUND = ExtResource( 6 )
 NEW_WAVE_VOLUME = -7.0
-wave = 91
 
 [node name="BordersImpulse" type="Node" parent="."]
 

@@ -11,7 +11,7 @@ func _ready():
 	$UI/HealthBar.set_max_health(100)
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		if is_instance_valid(get_node_or_null('PauseMenu')):
 			paused = not paused

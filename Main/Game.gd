@@ -112,7 +112,7 @@ func generate_new_wave(_anim):
 										'small':int(wave_total_points / 4),
 										'med':int(wave_total_points / 6) ,
 										'big':int(wave_total_points / 10)},
-							'ships':1 * ((wave)/5) if (wave) % 5 == 0 else 0}
+							'ships':1 * (((wave)/5) if (wave) % 5 == 0 else 0) + (1 if (wave) % 5 != 0 and wave > 10 else 0)}
 		for enemy_type in enemy_list.keys():
 			match enemy_type:
 				'asteroids':
@@ -168,7 +168,7 @@ func game_over():
 	$Advises.show_central_advice('GAME OVER')
 	game_ended = true
 	camera.zoom_out()
-	$Advises/AnimationPlayer.connect("animation_finished", self, 'show_score_screen')
+	var _v = $Advises/AnimationPlayer.connect("animation_finished", self, 'show_score_screen')
 	$HUD/PauseMenu.queue_free()
 
 func show_score_screen(_anim):

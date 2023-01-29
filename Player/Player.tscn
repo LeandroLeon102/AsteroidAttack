@@ -64,7 +64,6 @@ __meta__ = {
 "_edit_group_": true
 }
 BULLETS_VOLUME = -10.0
-god = true
 max_velocity = 20
 acceleration = 20
 LASER_SOUND = ExtResource( 10 )

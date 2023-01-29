@@ -88,7 +88,6 @@ modulate_color = Color( 0, 0.741176, 1, 0.211765 )
 
 [node name="RecordsScreen" type="Node" groups=["RecordsScreen"]]
 script = ExtResource( 1 )
-RecordEntry = ExtResource( 5 )
 MainMenu = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

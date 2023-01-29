@@ -10,6 +10,7 @@ damage = 50
 speed = 1300
 viewport_out_check = true
 play_explode_sound = false
+PuffColor = Color( 0.329412, 0.772549, 0.956863, 1 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

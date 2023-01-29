@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Menus/InformationScreen.gd" type="Script" id=1]
 [ext_resource path="res://Source/Images/UI/return.png" type="Texture" id=2]
@@ -14,7 +14,14 @@ margin_top = 7.0
 margin_bottom = 7.0
 modulate_color = Color( 0, 0.741176, 1, 0.211765 )
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Source/VFX/RawFonts/Kenney Pixel.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Control:rect_position:x")
@@ -95,6 +102,10 @@ margin_left = 1330.0
 margin_top = 50.0
 margin_right = 2510.0
 margin_bottom = 670.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Panel" type="Panel" parent="Control"]
 margin_left = 100.0
@@ -105,6 +116,213 @@ custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer"]
+margin_right = 929.0
+margin_bottom = 1643.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_right = 929.0
+margin_bottom = 4.0
+
+[node name="HSeparator3" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 929.0
+margin_bottom = 12.0
+
+[node name="Label" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 16.0
+margin_right = 929.0
+margin_bottom = 64.0
+size_flags_vertical = 1
+text = "******  NOTES  ******"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator4" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 929.0
+margin_bottom = 72.0
+
+[node name="Label2" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 929.0
+margin_bottom = 262.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
+text = "
+this game is compatible with controllers and touchscreens, but playing on a mobile device on the web version will cause lag*
+
+
+if not connected to internet, new high scores will not be saved on the online leaderboard. make sure to be connected to internet after making a new highscore "
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 266.0
+margin_right = 929.0
+margin_bottom = 270.0
+
+[node name="HSeparator5" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 274.0
+margin_right = 929.0
+margin_bottom = 278.0
+
+[node name="Label3" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 282.0
+margin_right = 929.0
+margin_bottom = 330.0
+text = "******  controls  ******"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator6" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 334.0
+margin_right = 929.0
+margin_bottom = 338.0
+
+[node name="Label4" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 342.0
+margin_right = 929.0
+margin_bottom = 1068.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
+text = "
+COMPATIBLE DEVICES: 
+    - keyboard & mouse
+    - ps4/xbox/any other gamepad
+    - touchscreen(will automaticaly generate virtual joysticks)
+	
+keyboard & mouse:
+    - use wasd keys or arrows to move your ship
+    - use the cursor to set the shoot direction
+    - press repeatedly spacebar or left click to shoot faster
+    - keep pressed spacebar or left click to autoshoot(a little bit slower)
+    - press shift/alt/right click to see where are the enemies
+
+ps4/xbox/any other gamepad
+    - left joystick/arrows to move your ship
+    - right joystick to set the shoot direction
+    - press repeatedly  r/r2/x(ps)/A(xbox)/b(nintendo)  to shoot faster
+    - keep pressed  r/r2/x(ps)/A(xbox)/b(nintendo)  to autoshoot(a little bit slower)
+    - press  l/l2 to see where are the enemies
+
+ touchscreen(will automaticaly generate virtual joysticks):
+    - left joystick to move your ship
+    - right joystick to set the shoot direction
+    - press right Joystick to shoot faster
+    - hold right joystick in a direction to autoshoot(a little bit slower)
+    - press aim button to see where are the enemies
+	"
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator7" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1072.0
+margin_right = 929.0
+margin_bottom = 1076.0
+
+[node name="HSeparator8" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1080.0
+margin_right = 929.0
+margin_bottom = 1084.0
+
+[node name="Label5" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1088.0
+margin_right = 929.0
+margin_bottom = 1136.0
+text = "******  information  ******"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator9" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1140.0
+margin_right = 929.0
+margin_bottom = 1144.0
+
+[node name="Label6" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1148.0
+margin_right = 929.0
+margin_bottom = 1280.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
+text = "
+the first version of this game was originally made as an entry for the #kenneyjam2021, but got a great rework adding a lot of new features and improvements. you can still play the first version of the game by accessing the link in the itch.io page of this game.
+"
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator10" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1284.0
+margin_right = 929.0
+margin_bottom = 1288.0
+
+[node name="HSeparator11" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1292.0
+margin_right = 929.0
+margin_bottom = 1296.0
+
+[node name="Label7" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1300.0
+margin_right = 929.0
+margin_bottom = 1348.0
+text = "******  credits & thanks  ******"
+align = 1
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator12" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1352.0
+margin_right = 929.0
+margin_bottom = 1356.0
+
+[node name="Label8" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1360.0
+margin_right = 929.0
+margin_bottom = 1627.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
+text = "
+this game was completely and entirely developed by leandro leon, aka @leo102.
+the graphics of the game are from the kenney assets page, but were hand drawn in vectorized format for better results. 
+
+hope you enjoy playing this game, and if so, please consider leaving a comment, rating and following my itch.io page
+
+if you want to make a donation i will appreciate it very much
+"
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="HSeparator13" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1631.0
+margin_right = 929.0
+margin_bottom = 1635.0
+
+[node name="HSeparator14" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 1639.0
+margin_right = 929.0
+margin_bottom = 1643.0
 
 [node name="Back" type="Button" parent="Control"]
 use_parent_material = true
@@ -117,13 +335,9 @@ text = "Back"
 icon = ExtResource( 2 )
 flat = true
 
-[node name="LinkButton" type="LinkButton" parent="Control"]
-margin_right = 40.0
-margin_bottom = 48.0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
-anims/RESET = SubResource( 1 )
+anims/RESET = SubResource( 6 )
 anims/hide = SubResource( 3 )
 anims/show = SubResource( 2 )
 

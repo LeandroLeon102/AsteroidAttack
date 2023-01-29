@@ -21,10 +21,11 @@ var SoundEffect = preload("res://SFX/SoundEffect.tscn")
 var ShipUFO = preload("res://Enemies/EnemyShipUFORed.tscn")
 
 
+
 var game_ended = false
 onready var EnemiesContainer = $Containers/Enemies
 onready var httpRequest  = $HTTPRequest
-
+onready var ExplosionsContainer = $Containers/Explosions
 
 var powerup_info = {
 	'types':[
@@ -36,29 +37,29 @@ var powerup_info = {
 var asteroid_info = {
 	'sizes':{
 		'big':[
-			"res://Asteroids/MeteorBrownBig1.tscn",
-			"res://Asteroids/MeteorBrownBig2.tscn",
-			"res://Asteroids/MeteorBrownBig3.tscn",
-			"res://Asteroids/MeteorBrownBig4.tscn",
-			"res://Asteroids/MeteorGreyBig1.tscn",
-			"res://Asteroids/MeteorGreyBig2.tscn",
-			"res://Asteroids/MeteorGreyBig3.tscn",
-			"res://Asteroids/MeteorGreyBig4.tscn"],
+			preload("res://Asteroids/MeteorBrownBig1.tscn"),
+			preload("res://Asteroids/MeteorBrownBig2.tscn"),
+			preload("res://Asteroids/MeteorBrownBig3.tscn"),
+			preload("res://Asteroids/MeteorBrownBig4.tscn"),
+			preload("res://Asteroids/MeteorGreyBig1.tscn"),
+			preload("res://Asteroids/MeteorGreyBig2.tscn"),
+			preload("res://Asteroids/MeteorGreyBig3.tscn"),
+			preload("res://Asteroids/MeteorGreyBig4.tscn")],
 		'med':[
-			"res://Asteroids/MeteorBrownMed1.tscn",
-			"res://Asteroids/MeteorBrownMed3.tscn",
-			"res://Asteroids/MeteorGreyMed1.tscn",
-			"res://Asteroids/MeteorGreyMed2.tscn"],
+			preload("res://Asteroids/MeteorBrownMed1.tscn"),
+			preload("res://Asteroids/MeteorBrownMed3.tscn"),
+			preload("res://Asteroids/MeteorGreyMed1.tscn"),
+			preload("res://Asteroids/MeteorGreyMed2.tscn")],
 		'small':[
-			"res://Asteroids/MeteorBrownSmall1.tscn",
-			"res://Asteroids/MeteorBrownSmall2.tscn",
-			"res://Asteroids/MeteorGreySmall1.tscn",
-			"res://Asteroids/MeteorGreySmall2.tscn"],
+			preload("res://Asteroids/MeteorBrownSmall1.tscn"),
+			preload("res://Asteroids/MeteorBrownSmall2.tscn"),
+			preload("res://Asteroids/MeteorGreySmall1.tscn"),
+			preload("res://Asteroids/MeteorGreySmall2.tscn")],
 		'tiny':[
-			"res://Asteroids/MeteorBrownTiny1.tscn",
-			"res://Asteroids/MeteorBrownTiny2.tscn",
-			"res://Asteroids/MeteorGreyTiny1.tscn",
-			"res://Asteroids/MeteorGreyTiny2.tscn"]
+			preload("res://Asteroids/MeteorBrownTiny1.tscn"),
+			preload("res://Asteroids/MeteorBrownTiny2.tscn"),
+			preload("res://Asteroids/MeteorGreyTiny1.tscn"),
+			preload("res://Asteroids/MeteorGreyTiny2.tscn")]
 	},
 	'health':{
 		'big':[100, 120],
@@ -116,7 +117,6 @@ func spawn_asteroid(position:Vector2=Vector2.ZERO, size:String='random', vel = V
 		size = asteroid_info['sizes'].keys()[randi()%4]
 
 	var asteroid = asteroid_info['sizes'][size][randi()%asteroid_info['sizes'][size].size()]
-	asteroid = load_scene(asteroid)
 	asteroid = spawn(asteroid)
 	asteroid.size = size
 	asteroid.drop_rate = asteroid_info['drop_rate'][size]
@@ -206,21 +206,25 @@ func records_screen(data=null):
 		yield(LootLocker.authenticate_guest_session(), 'completed')
 	yield(LootLocker.get_board(), 'completed')
 	var s = RecordsScreen.instance()
-	var leaderboard_copy = LEADERBOARD.duplicate()
-	if LootLocker.board != null:
+	var leaderboard_copy = []# = LEADERBOARD.duplicate()
+	
+	if LootLocker.board != null and LootLocker.can_get_board:
 		leaderboard_copy.append_array(LootLocker.board.duplicate())
 		if data != null:
-			LEADERBOARD.append(data)
-			leaderboard_copy.append_array(LEADERBOARD)
-			if leaderboard_copy.find(data, 0) < 100:
-			
+			leaderboard_copy.append(data)
+			leaderboard_copy.sort_custom(customSorter, 'sort')
+#			print(leaderboard_copy.find(data), leaderboard_copy.find(data) <= 100)
+			if leaderboard_copy.find(data, 0) <= 99:
 				yield(LootLocker.submit_records(data), 'completed')
 	else:
 		if data != null:
 			
 			LEADERBOARD.append(data)
 			leaderboard_copy.append_array(LEADERBOARD)
-
+			leaderboard_copy.append_array(LootLocker.board.duplicate())
+		else:
+			leaderboard_copy.append_array(LEADERBOARD)
+			leaderboard_copy.append_array(LootLocker.board.duplicate())
 		
 	leaderboard_copy.sort_custom(customSorter, 'sort')
 			

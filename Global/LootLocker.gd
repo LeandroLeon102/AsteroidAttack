@@ -2,7 +2,8 @@ extends Node
 
 var token
 var player_id
-var board
+var board = []
+var can_get_board = false
 
 
 func authenticate_guest_session():
@@ -22,13 +23,13 @@ func authenticate_guest_session():
 		'game_key': '77eee908b20748d7971b5fe97118688cc0266156',
 		'game_version': '2.0.0',
 		'player_identifier': player_id, 
-		'development_mode': true
+		'development_mode': false
 	}
 	else:
 		request_body = {
 		'game_key': '77eee908b20748d7971b5fe97118688cc0266156',
 		'game_version': '2.0.0',
-		'development_mode': true
+		'development_mode': false
 	}
 
 	http_request.request(url, header, false, method, to_json(request_body))
@@ -40,7 +41,7 @@ func authenticate_guest_session():
 			if player_id == '':
 				player_id = response['player_identifier']
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('done')
-
+			can_get_board = true
 		else:
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('error')
 
@@ -82,12 +83,14 @@ func get_board():
 	if response != null:
 		if 'items' in response:
 			board = response['items']
-
+			can_get_board = true
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('done')
-
+			
 		else:
+			can_get_board = false
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('error')
 
 	else:
+		can_get_board = false
 		anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('error')
 

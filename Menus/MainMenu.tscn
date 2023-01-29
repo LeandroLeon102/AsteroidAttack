@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Source/VFX/unshaded.tres" type="Material" id=1]
 [ext_resource path="res://Source/Images/UI/exitRight.png" type="Texture" id=2]
 [ext_resource path="res://Source/Images/UI/forward.png" type="Texture" id=3]
+[ext_resource path="res://Source/Images/SocialNetworksLogos/itch-io.svg" type="Texture" id=4]
+[ext_resource path="res://Source/Images/SocialNetworksLogos/paypal (1).svg" type="Texture" id=5]
 [ext_resource path="res://Source/Images/UI/information.png" type="Texture" id=6]
 [ext_resource path="res://Menus/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Source/Images/UI/leaderboardsComplex.png" type="Texture" id=8]
@@ -13,6 +15,27 @@ font_path = "res://Source/VFX/RawFonts/Kenney Blocks.ttf"
 [sub_resource type="DynamicFont" id=9]
 size = 64
 font_data = SubResource( 10 )
+
+[sub_resource type="GDScript" id=14]
+resource_name = "ItchIoLink"
+script/source = "extends Button
+
+export(String) var URL
+
+
+func _on_ItchIoLink_pressed():
+	var _v = OS.shell_open(URL)
+"
+
+[sub_resource type="GDScript" id=15]
+resource_name = "PayPalLink"
+script/source = "extends Button
+
+export(String) var URL
+
+func _on_PayPalLink_pressed():
+	var _v = OS.shell_open(URL)
+"
 
 [sub_resource type="Animation" id=11]
 resource_name = "HIDDEN"
@@ -107,6 +130,9 @@ script = ExtResource( 7 )
 material = ExtResource( 1 )
 margin_right = 1280.0
 margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Label" type="Label" parent="Control"]
 modulate = Color( 15, 15, 15, 1 )
@@ -116,9 +142,12 @@ anchor_bottom = 1.0
 margin_bottom = -360.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 9 )
-text = "Asteroid  Atack !"
+text = "Asteroid Attack!"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 use_parent_material = true
@@ -206,6 +235,46 @@ icon = ExtResource( 6 )
 flat = true
 icon_align = 1
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -174.0
+margin_right = 137.0
+margin_bottom = -18.0
+custom_constants/separation = 17
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="ItchIoLink" type="Button" parent="Control/VBoxContainer3"]
+margin_right = 135.0
+margin_bottom = 69.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource( 4 )
+flat = true
+clip_text = true
+icon_align = 1
+expand_icon = true
+script = SubResource( 14 )
+URL = "https://leo102.itch.io"
+
+[node name="PayPalLink" type="Button" parent="Control/VBoxContainer3"]
+margin_top = 86.0
+margin_right = 135.0
+margin_bottom = 156.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource( 5 )
+flat = true
+clip_text = true
+icon_align = 1
+expand_icon = true
+script = SubResource( 15 )
+URL = "https://www.paypal.com/donate/?hosted_button_id=RBTZBG4MQRWR2"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
 anims/HIDDEN = SubResource( 11 )
@@ -221,3 +290,5 @@ anims/show = SubResource( 3 )
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Leaderboard" to="." method="_on_Leaderboard_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer3/ItchIoLink" to="Control/VBoxContainer3/ItchIoLink" method="_on_ItchIoLink_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer3/PayPalLink" to="Control/VBoxContainer3/PayPalLink" method="_on_PayPalLink_pressed"]

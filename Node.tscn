@@ -4,10 +4,20 @@
 resource_name = "test"
 script/source = "extends Node
 var wave_points = 2.4
+onready var httpRequest = $HTTPRequest
 
 func _ready():
-	generate_waves(100)
-	
+	randomize()
+
+	for i in range(20):
+		LootLocker.player_id = ''
+		yield(LootLocker.authenticate_guest_session(), 'completed')
+		var data = {
+		'score': randi()%10000,
+
+		'metadata':'{\"wave\":\"{}\", \"name\": \"{}\"}'.format(['N/A', 'NAME'], \"{}\")}
+		
+		yield(LootLocker.submit_records(data), 'completed')
 	
 
 func generate_waves(num):
@@ -37,5 +47,7 @@ func generate_waves(num):
 
 "
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" groups=["Main"]]
 script = SubResource( 1 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

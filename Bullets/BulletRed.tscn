@@ -9,6 +9,7 @@ damage = 5
 speed = 500
 viewport_out_check = true
 play_explode_sound = false
+PuffColor = Color( 1, 0.257812, 0.257812, 1 )
 
 [node name="Particles2D" parent="." index="2"]
 emitting = false
