@@ -7,6 +7,9 @@ var can_get_board = false
 
 
 func authenticate_guest_session():
+#	if OS.get_name == "Android":
+#		player_id = ''
+#	else:
 	player_id = OS.get_unique_id()
 	
 	var anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('pop_in')
@@ -35,6 +38,7 @@ func authenticate_guest_session():
 	http_request.request(url, header, false, method, to_json(request_body))
 	var response = yield(http_request, "request_completed")[3]
 	response = JSON.parse(response.get_string_from_utf8()).result
+
 	if response != null:
 		if 'session_token' in response:
 			token = response['session_token']
@@ -42,6 +46,8 @@ func authenticate_guest_session():
 				player_id = response['player_identifier']
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('done')
 			can_get_board = true
+			print(can_get_board)
+
 		else:
 			anim = get_tree().get_nodes_in_group('Main')[0].play_info_animation('error')
 

@@ -58,3 +58,18 @@ func _on_Button_pressed():
 	paused = false
 	get_tree().set_pause(paused)
 	get_parent().end_game()
+	
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		if is_instance_valid(get_node_or_null('PauseMenu')):
+			paused = not paused
+			get_tree().set_pause(paused)
+			if paused: 
+				$UI.visible = false
+				$PauseMenu.visible = true
+			else:
+				$UI.visible = true
+				$PauseMenu.visible = false
+	if paused:
+		if Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_left") or Input.is_action_just_pressed("ui_accept"):
+			$PauseMenu/Button.grab_focus()

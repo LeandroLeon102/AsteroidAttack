@@ -127,8 +127,8 @@ margin_bottom = -20.0
 follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/ScrollContainer"]
-margin_right = 929.0
-margin_bottom = 1643.0
+margin_right = 3.0
+margin_bottom = 1724.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -159,32 +159,35 @@ margin_bottom = 72.0
 [node name="Label2" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 76.0
 margin_right = 929.0
-margin_bottom = 262.0
+margin_bottom = 343.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 7 )
 text = "
 this game is compatible with controllers and touchscreens, but playing on a mobile device on the web version will cause lag*
 
 
-if not connected to internet, new high scores will not be saved on the online leaderboard. make sure to be connected to internet after making a new highscore "
+if not connected to internet, new high scores will not be saved on the online leaderboard. make sure to be connected to internet after making a new highscore 
+
+Advertency: the names can contain sensitive words***
+"
 valign = 1
 autowrap = true
 uppercase = true
 
 [node name="HSeparator" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 266.0
+margin_top = 347.0
 margin_right = 929.0
-margin_bottom = 270.0
+margin_bottom = 351.0
 
 [node name="HSeparator5" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 274.0
+margin_top = 355.0
 margin_right = 929.0
-margin_bottom = 278.0
+margin_bottom = 359.0
 
 [node name="Label3" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 282.0
+margin_top = 363.0
 margin_right = 929.0
-margin_bottom = 330.0
+margin_bottom = 411.0
 text = "******  controls  ******"
 align = 1
 valign = 1
@@ -192,14 +195,14 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator6" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 334.0
+margin_top = 415.0
 margin_right = 929.0
-margin_bottom = 338.0
+margin_bottom = 419.0
 
 [node name="Label4" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 342.0
+margin_top = 423.0
 margin_right = 929.0
-margin_bottom = 1068.0
+margin_bottom = 1149.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 7 )
 text = "
@@ -234,19 +237,19 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator7" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1072.0
+margin_top = 1153.0
 margin_right = 929.0
-margin_bottom = 1076.0
+margin_bottom = 1157.0
 
 [node name="HSeparator8" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1080.0
+margin_top = 1161.0
 margin_right = 929.0
-margin_bottom = 1084.0
+margin_bottom = 1165.0
 
 [node name="Label5" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1088.0
+margin_top = 1169.0
 margin_right = 929.0
-margin_bottom = 1136.0
+margin_bottom = 1217.0
 text = "******  information  ******"
 align = 1
 valign = 1
@@ -254,14 +257,14 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator9" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1140.0
+margin_top = 1221.0
 margin_right = 929.0
-margin_bottom = 1144.0
+margin_bottom = 1225.0
 
 [node name="Label6" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1148.0
+margin_top = 1229.0
 margin_right = 929.0
-margin_bottom = 1280.0
+margin_bottom = 1361.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 7 )
 text = "
@@ -272,19 +275,19 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator10" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1284.0
+margin_top = 1365.0
 margin_right = 929.0
-margin_bottom = 1288.0
+margin_bottom = 1369.0
 
 [node name="HSeparator11" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1292.0
+margin_top = 1373.0
 margin_right = 929.0
-margin_bottom = 1296.0
+margin_bottom = 1377.0
 
 [node name="Label7" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1300.0
+margin_top = 1381.0
 margin_right = 929.0
-margin_bottom = 1348.0
+margin_bottom = 1429.0
 text = "******  credits & thanks  ******"
 align = 1
 valign = 1
@@ -292,14 +295,14 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator12" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1352.0
+margin_top = 1433.0
 margin_right = 929.0
-margin_bottom = 1356.0
+margin_bottom = 1437.0
 
 [node name="Label8" type="Label" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1360.0
+margin_top = 1441.0
 margin_right = 929.0
-margin_bottom = 1627.0
+margin_bottom = 1708.0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 7 )
 text = "
@@ -315,14 +318,14 @@ autowrap = true
 uppercase = true
 
 [node name="HSeparator13" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1631.0
+margin_top = 1712.0
 margin_right = 929.0
-margin_bottom = 1635.0
+margin_bottom = 1716.0
 
 [node name="HSeparator14" type="HSeparator" parent="Control/Panel/ScrollContainer/VBoxContainer"]
-margin_top = 1639.0
+margin_top = 1720.0
 margin_right = 929.0
-margin_bottom = 1643.0
+margin_bottom = 1724.0
 
 [node name="Back" type="Button" parent="Control"]
 use_parent_material = true

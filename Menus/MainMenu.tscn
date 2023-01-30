@@ -126,37 +126,31 @@ tracks/1/keys = {
 [node name="MainMenu" type="Node" groups=["MainMenu"]]
 script = ExtResource( 7 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
 [node name="Control" type="Control" parent="."]
 material = ExtResource( 1 )
 margin_right = 1280.0
 margin_bottom = 720.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Label" type="Label" parent="Control"]
 modulate = Color( 15, 15, 15, 1 )
 use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -360.0
+margin_right = 1280.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 9 )
 text = "Asteroid Attack!"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 256.0
 margin_top = 320.0
-margin_right = -256.0
-margin_bottom = -106.0
+margin_right = 1024.0
+margin_bottom = 614.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 75
@@ -194,10 +188,8 @@ icon = ExtResource( 2 )
 use_parent_material = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1192.0
-margin_top = 542.0
-margin_right = -10.0
-margin_bottom = -8.0
+margin_left = 1188.0
+margin_top = 583.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -205,8 +197,8 @@ __meta__ = {
 [node name="Leaderboard" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
 use_parent_material = true
-margin_right = 78.0
-margin_bottom = 83.0
+margin_right = 92.0
+margin_bottom = 66.0
 rect_clip_content = true
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
 focus_neighbour_top = NodePath("../Information")
@@ -223,9 +215,9 @@ __meta__ = {
 [node name="Information" type="Button" parent="Control/VBoxContainer2"]
 modulate = Color( 1.5, 1.5, 1.5, 1 )
 use_parent_material = true
-margin_top = 87.0
-margin_right = 78.0
-margin_bottom = 170.0
+margin_top = 70.0
+margin_right = 92.0
+margin_bottom = 137.0
 focus_neighbour_left = NodePath("../../VBoxContainer/Play")
 focus_neighbour_top = NodePath("../Leaderboard")
 focus_neighbour_bottom = NodePath("../Leaderboard")
@@ -235,22 +227,25 @@ icon = ExtResource( 6 )
 flat = true
 icon_align = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = -174.0
-margin_right = 137.0
-margin_bottom = -18.0
+margin_top = -193.0
+margin_right = 144.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_clip_content = true
+size_flags_horizontal = 15
+size_flags_vertical = 15
 custom_constants/separation = 17
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+alignment = 1
 
-[node name="ItchIoLink" type="Button" parent="Control/VBoxContainer3"]
-margin_right = 135.0
-margin_bottom = 69.0
+[node name="ItchIoLink" type="Button" parent="Control/VBoxContainer4"]
+margin_right = 144.0
+margin_bottom = 88.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource( 4 )
@@ -261,12 +256,12 @@ expand_icon = true
 script = SubResource( 14 )
 URL = "https://leo102.itch.io"
 
-[node name="PayPalLink" type="Button" parent="Control/VBoxContainer3"]
-margin_top = 86.0
-margin_right = 135.0
-margin_bottom = 156.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="PayPalLink" type="Button" parent="Control/VBoxContainer4"]
+margin_top = 105.0
+margin_right = 144.0
+margin_bottom = 193.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
 icon = ExtResource( 5 )
 flat = true
 clip_text = true
@@ -290,5 +285,5 @@ anims/show = SubResource( 3 )
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Leaderboard" to="." method="_on_Leaderboard_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/Information" to="." method="_on_Information_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer3/ItchIoLink" to="Control/VBoxContainer3/ItchIoLink" method="_on_ItchIoLink_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer3/PayPalLink" to="Control/VBoxContainer3/PayPalLink" method="_on_PayPalLink_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer4/ItchIoLink" to="Control/VBoxContainer4/ItchIoLink" method="_on_ItchIoLink_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer4/PayPalLink" to="Control/VBoxContainer4/PayPalLink" method="_on_PayPalLink_pressed"]
